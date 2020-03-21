@@ -1,4 +1,4 @@
-# vitutiy-vue-ui
+# vitutiy-ui
 
 ## Project setup
 ```
