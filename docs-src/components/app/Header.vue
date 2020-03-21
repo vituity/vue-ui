@@ -27,7 +27,7 @@ nav.navbar.is-dark(role='navigation' aria-label='main navigation')
         .b-btns
           a.b-btn.is-primary
             strong Sign up
-          a.b-btn.is-light
+          a.b-btn.is-info
             | Log in
 </template>
 

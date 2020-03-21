@@ -7,8 +7,7 @@
     Header
     .app-body
       Sidebar.sticky-sidebar(:style="{height:sidebarHeight}")
-      keep-alive
-        router-view
+      router-view
   Statusbar
 
 //-Fixed header, sidebar, statusbar
@@ -17,8 +16,7 @@
   .app-body.no-scroll
     Sidebar
     .app-scroll
-      keep-alive
-        router-view
+      router-view
   Statusbar
 
 //-Fixed statusbar
@@ -27,8 +25,7 @@
     Header
     .app-body
       Sidebar
-      keep-alive
-        router-view
+      router-view
   Statusbar
 
 //- Fixed header and statusbar
@@ -37,8 +34,7 @@
   .app-scroll
     .app-body
       Sidebar
-      keep-alive
-        router-view
+      router-view
   Statusbar
 
 //- No Fixed elements
@@ -46,14 +42,13 @@
   Header
   .app-body
     Sidebar
-    keep-alive
-      router-view
+    router-view
   Statusbar
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // showNavbar: true,
       scrollPosition: 0,
@@ -75,11 +70,11 @@ export default {
       return `calc(100vh - ${offset}px)`
     }
   },
-  mounted () {
+  mounted() {
     // window.addEventListener('resize', this.onResize)
     // this.onResize()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     // window.removeEventListener('resize', this.onResize)
   },
   methods: {
@@ -87,7 +82,7 @@ export default {
     //   this.win.height = window.innerHeight
     //   this.win.width = window.innerWidth
     // },
-    onScroll (e) {
+    onScroll(e) {
       // Get the current scroll position
       let currentScrollPosition = e.target.scrollTop
       // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero

@@ -6,6 +6,7 @@ import MainLayoutView from './components/app/MainLayoutView'
 import TableBasicPage from './components/pages/TableBasicPage'
 import TabsPage from './components/pages/TabsPage'
 import FormElementsPage from './components/pages/FormElementsPage'
+import RuleBuilderPage from './components/pages/RuleBuilderPage'
 
 Vue.use(Router)
 
@@ -21,8 +22,16 @@ export default new Router({
           component: Dashboard
         },
         {
+          path: '/components/rule-builder',
+          component: RuleBuilderPage
+        },
+        {
           path: '/ui/buttons',
           component: ButtonsPage
+        },
+        {
+          path: '/ui/tabs',
+          component: TabsPage
         },
         {
           path: '/table/basic',
@@ -31,10 +40,6 @@ export default new Router({
         {
           path: '/form/elements',
           component: FormElementsPage
-        },
-        {
-          path: '/ui/tabs',
-          component: TabsPage
         }
       ]
     },

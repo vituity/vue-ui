@@ -23,6 +23,14 @@ const sidebarMenu = [
   // },
   // { path: '/widgets', icon: 'fab fa-simplybuilt', title: 'Widgets', label: 'NEW' },
   {
+    path: '/components',
+    icon: 'fa fa-star',
+    title: 'Vue Components',
+    children: [
+      { path: '/components/rule-builder', title: 'Rule Builder', highlight: true }
+    ]
+  },
+  {
     path: '/ui',
     icon: 'fa fa-gem',
     title: 'UI Elements',
