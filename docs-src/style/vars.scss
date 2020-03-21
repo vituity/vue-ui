@@ -1,0 +1,23 @@
+$ui-color-light          : #fff;
+$ui-color-light-neutral  : #F1F2EF;
+$ui-color-dark           : #2c3e50;
+$ui-color-dark-neutral   : #4f6f7f;
+$ui-color-darker         : #1d2935;
+$ui-color-primary        : #428bca; //#FC9223;
+$ui-color-accent         : #6806c1;
+$ui-color-danger         : #e83030;
+$ui-color-warning        : #ea6e00;
+$ui-color-info           : #03c2e6;
+$ui-color-success        : #42b983;
+
+$color-background-light: lighten($ui-color-light-neutral, 80%);
+$color-text-light: lighten($ui-color-dark, 40%);
+
+$content-bg-primary-light: darken($ui-color-light-neutral, 8%);
+$content-bg-primary-dark: lighten($ui-color-dark, 3%);
+$content-bg-secondary-light: darken($ui-color-light-neutral, 11%);
+$content-bg-secondary-dark: lighten($ui-color-dark, 6%);
+$content-bg-list-light: $ui-color-light-neutral;
+$content-bg-list-dark: $ui-color-dark;
+
+$br: 3px;

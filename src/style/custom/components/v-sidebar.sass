@@ -1,0 +1,116 @@
+$sidebar-accent: $primary !default
+
+.v-sidebar
+  min-width: 220px
+  max-width: 220px
+  background: $dark
+  font-size: 12px
+  overflow: hidden
+  overflow-y: auto
+  @each $name, $pair in $colors
+    $color: nth($pair, 1)
+    $color-invert: nth($pair, 2)
+    &.is-#{$name}
+      background-color: $color
+      color: $color-invert
+      .nav li
+        .nav-item
+          color: rgba($color-invert,.6)
+          &:hover,
+          &:focus,
+            color: $color-invert
+        &.is-active
+          & > .nav-item
+            background-color: darken($color, 5%)
+            color: $color-invert
+            & > .b-icon
+              color: $sidebar-accent
+        & > .sub-nav
+          & > li.is-active
+            .nav-item
+              color: $color-invert
+              background-color: transparent
+            &::after
+              border-color: $sidebar-accent
+  .nav
+    li
+      position: relative
+      &.is-active,
+      &.expand
+        & > .sub-nav
+          display: block
+        .caret
+          +transform(rotate(90deg))
+      &.closed
+        & > .sub-nav
+          display: none
+        .caret
+          +transform(rotate(0deg))
+    .nav-header
+      margin: 0
+      padding: 15px 20px 3px
+      line-height: 20px
+      font-size: 11px
+      font-weight: 600
+    .nav-item
+      display: flex
+      align-items: center
+      padding: 7px 20px
+      cursor: pointer
+      > .b-icon
+        margin-right: 10px
+      > .v-label
+        margin-left: 10px
+      > .v-badge
+        margin-left: auto
+      > .caret
+        margin-left: auto
+        +transition(all .2s linear)
+        +fontawesome
+        &::after
+          content: '\f054'
+  .sub-nav
+    list-style-type: none
+    padding: 5px 0 10px 39px
+    display: none
+    .sub-nav
+      padding: 0 0 0 15px
+      background: 0 0
+    & > li
+      &::before
+        content: ""
+        position: absolute
+        left: -13px
+        top: 0
+        bottom: 0
+        width: 2px
+        background: #242b30
+      &::after
+        content: ""
+        position: absolute
+        left: 0
+        width: 6px
+        height: 6px
+        border: 1px solid hsla(0,0%,100%,.6)
+        top: 11px
+        margin-top: -2px
+        z-index: 10
+        background: #2d353c
+        border-radius: 4px
+      &:first-child
+        &::before
+          top: -14px
+      &:last-child
+        &::before
+          bottom: auto
+          height: 13px
+    .nav-item
+      padding: 3px 20px 3px 15px
+      &::after
+        content: ""
+        position: absolute
+        left: -11px
+        top: 11px
+        width: 11px
+        height: 2px
+        background: #242b30

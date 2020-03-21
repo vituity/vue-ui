@@ -1,0 +1,43 @@
+$flex-items: (normal, stretch, center, start, end, flex-start, flex-end, self-start, self-end, baseline, first, last, safe, unsafe, inherit, initial, unset)
+
+@each $val in $flex-items
+  .align-items-#{$val}
+    align-items: $val
+
+$flex-content: (baseline, center, end, flex-end, flex-start, initial, inherit, left, normal, right, safe, space-between, space-between, space-evenly, start, stretch, unsafe, unset)
+
+@each $val in $flex-content
+  .justify-content-#{$val}
+    justify-content: $val
+
+  .align-content-#{$val}
+    align-content: $val
+.v-awesome
+  color: red
+
+.is-flex
+  display: flex
+
+.is-flex-row
+  display: flex
+  flex-direction: row
+
+.is-flex-column
+  display: flex
+  flex-direction: column
+
+.is-flex-wrap
+  display: flex
+  flex-wrap: wrap
+
+.is-flex-row-wrap
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+.is-flex-column-wrap
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+
+

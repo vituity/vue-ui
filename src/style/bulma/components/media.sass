@@ -1,0 +1,50 @@
+$media-border-color: bulmaRgba($border, 0.5) !default
+
+.b-media
+  align-items: flex-start
+  display: flex
+  text-align: left
+  .b-content:not(:last-child)
+    margin-bottom: 0.75rem
+  .b-media
+    border-top: 1px solid $media-border-color
+    display: flex
+    padding-top: 0.75rem
+    .b-content:not(:last-child),
+    .b-control:not(:last-child)
+      margin-bottom: 0.5rem
+    .b-media
+      padding-top: 0.5rem
+      & + .b-media
+        margin-top: 0.5rem
+  & + .b-media
+    border-top: 1px solid $media-border-color
+    margin-top: 1rem
+    padding-top: 1rem
+  // Sizes
+  &.is-large
+    & + .b-media
+      margin-top: 1.5rem
+      padding-top: 1.5rem
+
+.b-media-left,
+.b-media-right
+  flex-basis: auto
+  flex-grow: 0
+  flex-shrink: 0
+
+.b-media-left
+  margin-right: 1rem
+
+.b-media-right
+  margin-left: 1rem
+
+.b-media-content
+  flex-basis: auto
+  flex-grow: 1
+  flex-shrink: 1
+  text-align: left
+
++mobile
+  .b-media-content
+    overflow-x: auto

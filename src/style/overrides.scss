@@ -1,0 +1,61 @@
+// Bulma Overrides Vars
+$grey-darker:   #2d353c !default;
+$grey-dark:     #3e5770 !default;
+$grey:          #809fae !default;
+$grey-light:    #b6c6ce !default;
+$grey-lighter:  #e0e5e7 !default;
+
+$family-monospace: 'Roboto Mono', monospace !default;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+
+$h1-font-size:                $font-size-base * 2.5 !default;
+$h2-font-size:                $font-size-base * 2 !default;
+$h3-font-size:                $font-size-base * 1.75 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default;
+
+$headings-margin-bottom:      1rem / 2 !default;
+$headings-font-family:        null !default;
+$headings-font-style:         null !default;
+$headings-font-weight:        500 !default;
+$headings-line-height:        1.2 !default;
+$headings-color:              null !default;
+
+$body-overflow-y: auto !default;
+
+$custom-colors: ("accent": (lime)) !default;
+
+// vue ui overrides
+$ui-color-light          : #fff;
+$ui-color-light-neutral  : #F1F2EF;
+$ui-color-dark           : #2c3e50;
+$ui-color-dark-neutral   : #4f6f7f;
+$ui-color-darker         : #1d2935;
+$ui-color-primary        : #428bca; //#FC9223;
+$ui-color-accent         : #6806c1;
+$ui-color-danger         : #e83030;
+$ui-color-warning        : #ea6e00;
+$ui-color-info           : #03c2e6;
+$ui-color-success        : #42b983;
+
+$color-background-light: lighten($ui-color-light-neutral, 80%);
+$color-text-light: lighten($ui-color-dark, 40%);
+
+$content-bg-primary-light: darken($ui-color-light-neutral, 8%);
+$content-bg-primary-dark: lighten($ui-color-dark, 3%);
+$content-bg-secondary-light: darken($ui-color-light-neutral, 11%);
+$content-bg-secondary-dark: lighten($ui-color-dark, 6%);
+$content-bg-list-light: $ui-color-light-neutral;
+$content-bg-list-dark: $ui-color-dark;
+
+$br: 3px;

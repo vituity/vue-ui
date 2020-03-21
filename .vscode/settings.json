@@ -1,0 +1,25 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.DS_Store": true,
+    "**/.env.local": true,
+    "**/.env.*.local": true,
+    "**/npm-debug.log*": true,
+    "**/yarn-debug.log*": true,
+    "**/yarn-error.log*": true,
+    "**/.idea": true,
+    "**/*.suo": true,
+    "**/*.ntvs*": true,
+    "**/*.njsproj": true,
+    "**/*.sln": true,
+    "**/*.sw*": true,
+    "dist_electron": true
+  },
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+  "editor.formatOnSave": true,
+  "html.format.endWithNewline": true,
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

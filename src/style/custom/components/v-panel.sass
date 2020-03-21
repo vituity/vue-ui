@@ -1,0 +1,36 @@
+$box-color: $text !default
+$box-background-color: $white !default
+$box-radius: $radius-small !default
+$box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1) !default
+
+.v-panel
+  @extend %block
+  background-color: $box-background-color
+  border-radius: $box-radius
+  //box-shadow: $box-shadow
+  color: $box-color
+  +v-box
+  @each $name, $pair in $colors
+    $color: nth($pair, 1)
+    $color-invert: nth($pair, 2)
+    &.v-panel--header
+      background-color: $color
+      color: $color
+  .v-panel--header
+    +h-box
+    +box-center
+    padding: 10px 15px
+    background-color: $dark
+    color: $white
+    border-top-left-radius: $box-radius
+    border-top-right-radius: $box-radius
+		border: none
+  .v-panel--title
+    flex: 1
+    font-size: .8rem
+  .v-panel--actions
+    display: flex
+    align-items: center
+  .v-panel--body
+    flex: 1
+    overflow: auto

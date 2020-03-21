@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i')
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,400i,700,700i')
+
+@import './vars'
+@import '../../src/style/vituity'
+
+body
+  font-size: 16px
+  font-family: 'Roboto', 'Avenir', Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+thead.sticky
+  tr:first-child
+    th
+      position: sticky
+      top: -1px
+      background-color: $ui-color-light-neutral
+      z-index: 1
+      color: findColorInvert($ui-color-light-neutral)
+      cursor: pointer
+      &:hover
+        background-color: darken($ui-color-light-neutral,10%)
+::-webkit-scrollbar
+  width: 10px
+  height: 10px
+::-webkit-scrollbar-track-piece
+  background: transparent
+::-webkit-scrollbar-track:hover
+  background: rgba($ui-color-dark-neutral, .05)
+  .ui-dark-mode &
+    background: rgba($ui-color-dark-neutral, .1)
+::-webkit-scrollbar-thumb
+  background-color: lighten($ui-color-dark-neutral, 35%)
+  border: 3px solid transparent
+  background-clip: padding-box
+  border-radius: 5px
+  &:hover
+    background-color: $ui-color-dark-neutral
+  .ui-dark-mode &
+    background-color: lighten($ui-color-dark, 10%)
+    &:hover
+      background-color: lighten($ui-color-dark-neutral, 10%)
