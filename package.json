@@ -5,7 +5,7 @@
   "private": false,
   "author": {
     "name": "Matt Overall",
-    "email": "matt.overall@gmail.com"
+    "email": "matt.overall@vituity.com"
   },
   "license": "MIT",
   "main": "src/index.js",
@@ -14,10 +14,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MatthewOverall/vituity-ui.git"
   },
   "dependencies": {
     "vue-multiselect": "2.1.6",

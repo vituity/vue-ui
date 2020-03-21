@@ -1,4 +1,4 @@
-# vitutiy-ui
+# @vitutiy/ui
 
 ## Project setup
 ```
