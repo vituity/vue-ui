@@ -1,9 +1,10 @@
 
+import { dateFormat } from './filters/dateFormat'
+import * as filters from './filters/filters'
 // import VueIcons from './icons'
 // import VTooltip from 'v-tooltip'
 // import VueResize from 'vue-resize'
 import Logger from './utils/logger'
-import './filters/filters'
 
 // import 'focus-visible'
 
@@ -20,9 +21,16 @@ export { default as DisabledChild } from './mixins/DisabledChild'
 // export { generateHtmlIcon } from './icons'
 
 // Require all the components that start with 'BaseXXX.vue'
-const requireComponent = require.context('./components', true, /[a-z0-9]+\.(jsx?|vue)$/i)
+const requireComponent = require.context('./components', true, /[a-z0-9]+\.(jsx|vue)$/i)
 
 export function install(Vue, options = {}) {
+  Vue.filter('date', (date, format, config = {}) => {
+    return dateFormat(date, format, { ...options, ...config })
+  })
+
+  for (const k in filters) {
+    Vue.filter(k, filters[k].bind(options))
+  }
   Vue.use(Logger)
 
   // For each matching file name...
