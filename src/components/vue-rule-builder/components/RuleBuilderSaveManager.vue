@@ -7,7 +7,19 @@ import { deepClone } from '../utilities.js'
 export default {
   props: {
     query: {
-      type: Object
+      type: Object,
+      required: true
+    },
+    namespace: {
+      type: String,
+      required: true,
+      validator: function (val) {
+        var result = val.split('.').every(x => /^[a-z][a-z0-9-]{2,}$/i.test(x))
+        if (!result) {
+          console.error('Namespace must start with letter and only include letters, numbers and hypen')
+        }
+        return result
+      }
     }
   },
   data() {
@@ -24,12 +36,17 @@ export default {
   },
   methods: {
     save() {
-      const ix = this.savedRules.findIndex(x => x.name === this.name)
+      const name = this.name.trim()
+      if (name === '' || name === null) {
+        this.error = 'Name is required'
+        return
+      }
+      const ix = this.savedRules.findIndex(x => x.name === name)
       if (ix >= 0) {
         this.error = 'A rule with this name already exists.'
         return
       }
-      const ruleSet = { name: this.name, query: deepClone(this.query) }
+      const ruleSet = { name: name, query: deepClone(this.query) }
       this.savedRules.push(ruleSet)
       this.$emit('save', ruleSet)
       this.name = null
