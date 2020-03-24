@@ -26,7 +26,7 @@ export const operators = {
 
 const opArray = Object.values(operators)
 
-export const ruleTypes = {
+export const filterTypes = {
   string: {
     control: 'input',
     operators: opArray.filter(x => x.apply_to.includes('string')).map(x => x.type),

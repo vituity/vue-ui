@@ -10,7 +10,7 @@
 
 import RuleBuilderGroup from './layouts/Default/DefaultGroup.vue'
 import { deepMerge, deepClone } from './utilities.js'
-import { operators, ruleTypes } from './defaults.js'
+import { operators, filterTypes } from './defaults.js'
 
 var defaultLabels = {
   matchType: 'Match Type',
@@ -33,7 +33,7 @@ export default {
   },
 
   props: {
-    rules: {
+    filters: {
       Array,
       required: true
     },
@@ -66,7 +66,7 @@ export default {
         logicalOperator: this.labels.matchTypes[0].id,
         children: []
       },
-      ruleTypes
+      filterTypes
     }
   },
 
@@ -78,26 +78,26 @@ export default {
       return Object.assign({}, operators, this.operators)
     },
 
-    mergedRules() {
-      var mergedRules = []
-      this.rules.forEach((rule) => {
-        if (typeof this.ruleTypes[rule.type] !== 'undefined') {
-          const merged = deepMerge(this.ruleTypes[rule.type], rule)
-          mergedRules.push(merged)
+    mergedFilters() {
+      var mergedFilters = []
+      this.filters.forEach((filter) => {
+        if (typeof this.filterTypes[filter.type] !== 'undefined') {
+          const merged = deepMerge(this.filterTypes[filter.type], filter)
+          mergedFilters.push(merged)
         } else {
-          mergedRules.push(rule)
+          mergedFilters.push(filter)
         }
       })
 
-      return mergedRules
+      return mergedFilters
     },
     vrbProps() {
       return {
         index: 0,
         depth: 1,
         maxDepth: this.maxDepth,
-        ruleTypes: this.ruleTypes,
-        rules: this.mergedRules,
+        filterTypes: this.filterTypes,
+        filters: this.mergedFilters,
         labels: this.mergedLabels,
         operators: this.mergedOperators,
         isBasic: this.isBasic
@@ -138,10 +138,10 @@ export default {
   },
   methods: {
     validate() {
-      this.mergedRules.forEach(r => {
+      this.mergedFilters.forEach(r => {
         r.operators.forEach(o => {
           if (!this.mergedOperators[o]) {
-            console.error(`Invalid operator '${o}' found in rule`, r)
+            console.error(`Invalid operator '${o}' found in filter`, r)
           }
         })
       })

@@ -7,26 +7,26 @@ import { deepClone } from '../utilities.js'
 
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['query', 'index', 'rule', 'labels', 'depth', 'rules', 'operators'],
+  props: ['query', 'index', 'filter', 'labels', 'depth', 'filters', 'operators'],
   data() {
     return {
 
     }
   },
   computed: {
-    selectedRule: {
+    selectedFilter: {
       get() {
-        return this.rule
+        return this.filter
       },
       set(v) {
-        this.$emit('change-rule', this.index, v)
+        this.$emit('change-filter', this.index, v)
       }
     },
     selectedOperator() {
       return this.operators[this.query.operator]
     },
     isCustomComponent() {
-      return this.rule.input === 'custom-component'
+      return this.filter.input === 'custom-component'
     }
   },
 

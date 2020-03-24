@@ -14,13 +14,13 @@ export default {
   },
 
   props: {
-    ruleTypes: Object,
+    filterTypes: Object,
     type: {
       type: String,
       default: 'rule-builder-group'
     },
     query: Object,
-    rules: Array,
+    filters: Array,
     index: Number,
     maxDepth: Number,
     depth: Number,
@@ -36,17 +36,17 @@ export default {
   },
 
   methods: {
-    ruleById(field) {
-      var rule = null
+    filterById(field) {
+      var filter = null
 
-      this.rules.forEach(function (value) {
+      this.filters.forEach(function (value) {
         if (value.field === field) {
-          rule = value
+          filter = value
           return false
         }
       })
 
-      return rule
+      return filter
     },
     changeRule(index, newRule) {
       console.log('change-rule')
@@ -72,12 +72,12 @@ export default {
     addRule() {
       console.log('add-rule')
       const updatedQuery = deepClone(this.query)
-      const firstRule = this.rules[0]
+      const firstFilter = this.filters[0]
       const child = {
         type: 'rule-builder-rule',
         query: {
-          field: firstRule.field,
-          operator: firstRule.operators[0],
+          field: firstFilter.field,
+          operator: firstFilter.operators[0],
           value: null
         }
       }

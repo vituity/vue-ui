@@ -5,7 +5,7 @@ page(title='Rule Builder')
     vituity-rule-builder(
       v-model="query"
       :isFloating="true"
-      :rules="rules"
+      :filters="filters"
       :maxDepth="1"
       :isBasic="true"
       :query="query"
@@ -14,7 +14,7 @@ page(title='Rule Builder')
     )
     h4.m-t-20 Custom
     vue-rule-builder(
-        :rules="rules"
+        :filters="filters"
         :maxDepth="3"
         v-model="query"
       )
@@ -34,7 +34,7 @@ page(title='Rule Builder')
 
 <script>
 
-const rules = [
+const filters = [
   {
     field: 'field_1',
     label: 'Field 1',
@@ -134,7 +134,7 @@ export default {
   data() {
     return {
       query: defaultQuery,
-      rules: rules,
+      filters: filters,
       savedRules: []
     }
   },

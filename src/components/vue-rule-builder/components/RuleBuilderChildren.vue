@@ -6,9 +6,9 @@
       :key="getKey(child, index)"
       :type="child.type"
       :query.sync="child.query"
-      :rule-types="ruleTypes"
-      :rules="rules"
-      :rule="$parent.ruleById(child.query.field)"
+      :filterTypes="filterTypes"
+      :filters="filters"
+      :filter="$parent.filterById(child.query.field)"
       :index="index"
       :max-depth="maxDepth"
       :depth="depth + 1"
@@ -23,7 +23,7 @@
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['query', 'ruleTypes', 'rules', 'maxDepth', 'labels', 'operators', 'depth'],
+  props: ['query', 'filterTypes', 'filters', 'maxDepth', 'labels', 'operators', 'depth'],
 
   data() {
     return {

@@ -1,39 +1,39 @@
 <template lang="pug">
   .vrb-rule-input-container
     // Unrestricted input
-    template(v-if="rule.control === 'input'")
+    template(v-if="filter.control === 'input'")
       .b-control(v-if="!operator.multiple")
-        input.b-input(v-model="value1" v-bind="rule.props")
+        input.b-input(v-model="value1" v-bind="filter.props")
 
       .vrb-custom-component-wrap(v-else-if="operator.multiple")
-        tag-select(v-model='value1' v-bind="rule.props" :multiple="operator.multiple")
+        tag-select(v-model='value1' v-bind="filter.props" :multiple="operator.multiple")
 
     // Restricted input
-    template(v-if="rule.control === 'cleave'")
+    template(v-if="filter.control === 'cleave'")
       .b-control(v-if="!operator.multiple")
-        Cleave.b-input(v-model="value1" :options="rule.props")
+        Cleave.b-input(v-model="value1" :options="filter.props")
 
       .vrb-custom-component-wrap(v-else-if="operator.multiple")
-        tag-select(v-model='value1' v-bind="rule.props" :useCleave="true" :multiple="operator.multiple")
+        tag-select(v-model='value1' v-bind="filter.props" :useCleave="true" :multiple="operator.multiple")
 
     // Multi-Select Input (lookup)
-    template(v-else-if="rule.control === 'multi-select'")
+    template(v-else-if="filter.control === 'multi-select'")
       .vrb-custom-component-wrap
-        multi-select(v-model='value1' v-bind="rule.props" :multiple="operator.multiple")
+        multi-select(v-model='value1' v-bind="filter.props" :multiple="operator.multiple")
 
     // Tag-Select
-    template(v-else-if="rule.control === 'tag-select'")
+    template(v-else-if="filter.control === 'tag-select'")
       .vrb-custom-component-wrap
-        tag-select(v-model='value1' v-bind="rule.props" :multiple="operator.multiple")
+        tag-select(v-model='value1' v-bind="filter.props" :multiple="operator.multiple")
 
     // Boolean
-    template(v-else-if="rule.control === 'radio'")
+    template(v-else-if="filter.control === 'radio'")
       .b-control
-        label.b-radio(v-for="choice in rule.props.options")
+        label.b-radio(v-for="choice in filter.props.options")
           input(
-            :id="'depth' + depth + '-' + rule.field + '-' + index + '-' + choice.value"
+            :id="'depth' + depth + '-' + filter.field + '-' + index + '-' + choice.value"
             v-model="value1"
-            :name="'depth' + depth + '-' + rule.field + '-' + index"
+            :name="'depth' + depth + '-' + filter.field + '-' + index"
             type="radio"
             :value="choice.value"
             class="form-check-input"
@@ -47,7 +47,7 @@ import Cleave from '../../extras/CleaveInput'
 
 export default {
 
-  props: ['value', 'rule', 'operator', 'query', 'index', 'depth'],
+  props: ['value', 'filter', 'operator', 'query', 'index', 'depth'],
   components: { Cleave },
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
       return true
     },
     dataType() {
-      return this.rule.type
+      return this.filter.type
     },
     value1: {
       get() {
