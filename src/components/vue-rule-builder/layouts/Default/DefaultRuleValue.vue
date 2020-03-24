@@ -1,5 +1,5 @@
 <template lang="pug">
-  .rule-input-container
+  .vrb-rule-input-container
     // Unrestricted input
     template(v-if="rule.control === 'input'")
       .b-control(v-if="!operator.multiple")

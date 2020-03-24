@@ -11,6 +11,7 @@
       :max="max"
       :selectLabel="selectLabel"
       :showLabels="true"
+      openDirection="below"
       @tag="addTag",
       @remove="removeTag"
       tagPlaceholder=""

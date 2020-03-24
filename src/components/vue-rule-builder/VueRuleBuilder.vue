@@ -109,6 +109,7 @@ export default {
     this.$watch(
       'query',
       (newQuery, oldQuery) => {
+        console.log('query')
         if (JSON.stringify(newQuery) !== JSON.stringify(this.value)) {
           this.$emit('input', deepClone(newQuery))
         }
@@ -118,6 +119,13 @@ export default {
     this.$watch(
       'value',
       (newValue, oldValue) => {
+        console.log('value')
+        if (!newValue.logicalOperator || !newValue.children) {
+          newValue = {
+            logicalOperator: this.labels.matchTypes[0].id,
+            children: []
+          }
+        }
         if (JSON.stringify(newValue) !== JSON.stringify(this.query)) {
           this.query = deepClone(newValue)
         }

@@ -3,7 +3,7 @@
     <component
       :is="getComponent(child.type)"
       v-for="(child, index) in query.children"
-      :key="child.__key"
+      :key="getKey(child, index)"
       :type="child.type"
       :query.sync="child.query"
       :rule-types="ruleTypes"
@@ -41,6 +41,9 @@ export default {
       return type === 'rule-builder-group'
         ? this.groupComponent
         : this.ruleComponent
+    },
+    getKey(child, index) {
+      return (child.query.rule || child.type) + '_' + index
     }
   }
 }

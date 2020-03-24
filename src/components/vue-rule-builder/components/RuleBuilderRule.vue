@@ -47,6 +47,7 @@ export default {
     //   this.updateQuery(this.query.value)
     // },
     onOperatorChanged(newVal, oldVal) {
+      console.log('op-change')
       var newOp = this.operators[newVal]
       var oldOp = this.operators[oldVal]
       if (oldOp && newOp && oldOp.multiple === newOp.multiple && oldOp.nb_inputs === newOp.nb_inputs) {

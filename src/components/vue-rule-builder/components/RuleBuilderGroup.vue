@@ -53,7 +53,6 @@ export default {
       const updatedQuery = deepClone(this.query)
 
       const child = {
-        __key: Date.now(),
         type: 'rule-builder-rule',
         query: {
           rule: newRule.field,
@@ -75,7 +74,6 @@ export default {
       const updatedQuery = deepClone(this.query)
       const firstRule = this.rules[0]
       const child = {
-        __key: Date.now(),
         type: 'rule-builder-rule',
         query: {
           rule: firstRule.field,
@@ -101,7 +99,6 @@ export default {
       const updatedQuery = deepClone(this.query)
       if (this.depth < this.maxDepth) {
         updatedQuery.children.push({
-          __key: Date.now(),
           type: 'rule-builder-group',
           query: {
             logicalOperator: this.labels.matchTypes[0].id,

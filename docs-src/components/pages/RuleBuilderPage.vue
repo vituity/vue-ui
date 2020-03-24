@@ -1,6 +1,18 @@
 <template lang="pug">
 page(title='Rule Builder')
   .page--body
+    h4 Floating
+    vituity-rule-builder(
+      v-model="query"
+      :isFloating="true"
+      :rules="rules"
+      :maxDepth="1"
+      :isBasic="true"
+      :query="query"
+      namespace="example.basic"
+
+    )
+    h4.m-t-20 Custom
     vue-rule-builder(
         :rules="rules"
         :maxDepth="3"
@@ -9,6 +21,7 @@ page(title='Rule Builder')
     DefaultSaveManager(
         :savedRules.sync="savedRules"
         :query="query"
+        namespace="example.basic"
         @save="onRuleSaved"
         @load="onRuleLoaded"
         @delete="onRuleDeleted"
@@ -94,7 +107,6 @@ const defaultQuery = {
   logicalOperator: 'all',
   children: [
     {
-      __key: 1584564657317,
       type: 'rule-builder-rule',
       query: {
         rule: 'name',
@@ -106,12 +118,11 @@ const defaultQuery = {
       }
     },
     {
-      __key: 1584564914803,
       type: 'rule-builder-rule',
       query: {
         rule: 'price',
         operator: 'in',
-        value: []
+        value: [25.30]
       }
     }
   ]

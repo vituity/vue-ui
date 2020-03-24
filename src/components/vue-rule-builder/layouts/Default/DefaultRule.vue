@@ -1,19 +1,19 @@
 <template lang="pug">
-.vrb-rule.rule-container
+.vrb-rule
   .vrb-rule-form
-    .rule-filter-container
+    .vrb-rule-filter-container
       // Field Selection
       .b-control
         .b-select
           select(v-model='selectedRule')
             option(v-for='rule in rules', :key='rule.field', :value='rule') {{ rule.label }}
-    .rule-operator-container
+    .vrb-rule-operator-container
       // Operator Selection
       .b-control(v-if="typeof rule.operators !== 'undefined' && rule.operators.length > 1")
         .b-select
           select(v-model='query.operator')
             option(v-for='operator in rule.operators', :key='operator', :value='operator') {{ operator }}
-    .rule-value-container.is-info
+    .vrb-rule-value-container.is-info
       rule-builder-rule-value(
         v-if="selectedOperator.nb_inputs === 1"
         v-model="query.value"
@@ -56,8 +56,8 @@ export default {
 }
 </script>
 <style scoped>
-.vrb-custom-component-wrap {
+/* .vrb-custom-component-wrap {
   flex-grow: 1;
   padding-right: 15px;
-}
+} */
 </style>

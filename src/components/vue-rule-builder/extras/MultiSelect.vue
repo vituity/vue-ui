@@ -11,6 +11,7 @@
       :hideSelected="hideSelected"
       :max="max"
       :selectLabel="selectLabel"
+       openDirection="below"
       :loading="!options || options.length == 0"
     )
 </template>

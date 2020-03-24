@@ -20,12 +20,14 @@ export default {
         }
         return result
       }
+    },
+    savedRules: {
+      type: Array
     }
   },
   data() {
     return {
       name: '',
-      savedRules: [],
       error: null
     }
   },
@@ -35,7 +37,7 @@ export default {
     }
   },
   methods: {
-    save() {
+    saveRule() {
       const name = this.name.trim()
       if (name === '' || name === null) {
         this.error = 'Name is required'
@@ -47,19 +49,15 @@ export default {
         return
       }
       const ruleSet = { name: name, query: deepClone(this.query) }
-      this.savedRules.push(ruleSet)
       this.$emit('save', ruleSet)
       this.name = null
     },
-    load(name) {
-      const rule = this.savedRules.find(x => x.name === name)
+    loadRule(rule) {
       const val = deepClone(rule)
       this.$emit('load', val)
     },
-    delete(name) {
-      const ix = this.savedRules.findIndex(x => x.name === name)
-      this.savedRules.splice(ix, 1)
-      this.$emit('delete', name)
+    deleteRule(rule) {
+      this.$emit('delete', rule)
     }
   }
 }

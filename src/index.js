@@ -28,6 +28,10 @@ export function install(Vue, options = {}) {
     return dateFormat(date, format, { ...options, ...config })
   })
 
+  // Vue.filter('plural', (number, word, config = {}) => {
+  //   return pluralize(number, word, { ...options, ...config })
+  // })
+
   for (const k in filters) {
     Vue.filter(k, filters[k].bind(options))
   }
