@@ -31,10 +31,6 @@ export default {
   },
 
   mounted() {
-    // this.$watch(
-    //   'rule',
-    //   this.onSelectedRuleChanged
-    // )
     this.$watch(
       'query.operator',
       this.onOperatorChanged
@@ -42,10 +38,6 @@ export default {
   },
 
   methods: {
-    // onSelectedRuleChanged() {
-    //   console.debug('onSelectedRuleChanged')
-    //   this.updateQuery(this.query.value)
-    // },
     onOperatorChanged(newVal, oldVal) {
       console.log('op-change')
       var newOp = this.operators[newVal]

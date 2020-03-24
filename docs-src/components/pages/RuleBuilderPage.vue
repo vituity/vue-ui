@@ -109,7 +109,7 @@ const defaultQuery = {
     {
       type: 'rule-builder-rule',
       query: {
-        rule: 'name',
+        field: 'name',
         operator: 'in',
         value: [
           '123456',
@@ -120,7 +120,7 @@ const defaultQuery = {
     {
       type: 'rule-builder-rule',
       query: {
-        rule: 'price',
+        field: 'price',
         operator: 'in',
         value: [25.30]
       }

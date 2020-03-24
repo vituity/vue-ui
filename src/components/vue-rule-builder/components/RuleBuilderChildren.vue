@@ -8,7 +8,7 @@
       :query.sync="child.query"
       :rule-types="ruleTypes"
       :rules="rules"
-      :rule="$parent.ruleById(child.query.rule)"
+      :rule="$parent.ruleById(child.query.field)"
       :index="index"
       :max-depth="maxDepth"
       :depth="depth + 1"
@@ -43,7 +43,7 @@ export default {
         : this.ruleComponent
     },
     getKey(child, index) {
-      return (child.query.rule || child.type) + '_' + index
+      return (child.query.field || child.type) + '_' + index
     }
   }
 }

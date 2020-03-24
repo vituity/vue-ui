@@ -36,11 +36,11 @@ export default {
   },
 
   methods: {
-    ruleById(ruleId) {
+    ruleById(field) {
       var rule = null
 
       this.rules.forEach(function (value) {
-        if (value.field === ruleId) {
+        if (value.field === field) {
           rule = value
           return false
         }
@@ -55,7 +55,7 @@ export default {
       const child = {
         type: 'rule-builder-rule',
         query: {
-          rule: newRule.field,
+          field: newRule.field,
           operator: newRule.operators[0],
           value: null
         }
@@ -76,7 +76,7 @@ export default {
       const child = {
         type: 'rule-builder-rule',
         query: {
-          rule: firstRule.field,
+          field: firstRule.field,
           operator: firstRule.operators[0],
           value: null
         }
