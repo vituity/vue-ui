@@ -5,17 +5,17 @@
       v-for="(child, index) in query.children"
       :key="getKey(child, index)"
       :type="child.type"
-      :query.sync="child.query"
+      :query.sync="query.children[index]"
       :filterTypes="filterTypes"
       :filters="filters"
-      :filter="$parent.filterById(child.query.field)"
+      :filter="$parent.filterById(child.field)"
       :index="index"
       :max-depth="maxDepth"
       :depth="depth + 1"
       :labels="labels"
       :operators="operators"
       @child-deletion-requested="$parent.removeChild"
-      @change-rule="$parent.changeRule"
+      @change-filter="$parent.changeFilter"
     ></component>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         : this.ruleComponent
     },
     getKey(child, index) {
-      return (child.query.field || child.type) + '_' + index
+      return (child.field || child.type) + '_' + index
     }
   }
 }

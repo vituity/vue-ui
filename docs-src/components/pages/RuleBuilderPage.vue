@@ -1,31 +1,31 @@
 <template lang="pug">
 page(title='Rule Builder')
   .page--body
-    h4 Floating
-    vituity-rule-builder(
-      v-model="query"
-      :isFloating="true"
-      :filters="filters"
-      :maxDepth="1"
-      :isBasic="true"
-      :query="query"
-      namespace="example.basic"
+    //- h4 Floating
+    //- vituity-rule-builder(
+    //-   v-model="query"
+    //-   :isFloating="true"
+    //-   :filters="filters"
+    //-   :maxDepth="1"
+    //-   :isBasic="true"
+    //-   :query="query"
+    //-   namespace="example.basic"
 
-    )
+    //- )
     h4.m-t-20 Custom
     vue-rule-builder(
         :filters="filters"
         :maxDepth="3"
         v-model="query"
       )
-    DefaultSaveManager(
-        :savedRules.sync="savedRules"
-        :query="query"
-        namespace="example.basic"
-        @save="onRuleSaved"
-        @load="onRuleLoaded"
-        @delete="onRuleDeleted"
-      )
+    //- DefaultSaveManager(
+    //-     :savedRules.sync="savedRules"
+    //-     :query="query"
+    //-     namespace="example.basic"
+    //-     @save="onRuleSaved"
+    //-     @load="onRuleLoaded"
+    //-     @delete="onRuleDeleted"
+    //-   )
     br
     p
       pre {{ outputFormatted }}
@@ -108,22 +108,22 @@ const defaultQuery = {
   children: [
     {
       type: 'rule-builder-rule',
-      query: {
-        field: 'name',
-        operator: 'in',
-        value: [
-          '123456',
-          '7891'
-        ]
-      }
+
+      field: 'name',
+      operator: 'in',
+      value: [
+        '123456',
+        '7891'
+      ]
+
     },
     {
       type: 'rule-builder-rule',
-      query: {
-        field: 'price',
-        operator: 'in',
-        value: [25.30]
-      }
+
+      field: 'price',
+      operator: 'in',
+      value: [25.30]
+
     }
   ]
 }

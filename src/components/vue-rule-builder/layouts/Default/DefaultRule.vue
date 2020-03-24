@@ -11,8 +11,8 @@
       // Operator Selection
       .b-control(v-if="typeof filter.operators !== 'undefined' && filter.operators.length > 1")
         .b-select
-          select(v-model='query.operator')
-            option(v-for='operator in filter.operators', :key='operator', :value='operator') {{ operator }}
+          select(v-model='operator')
+            option(v-for='op in filter.operators', :key='op', :value='op') {{ op }}
     .vrb-rule-value-container.is-info
       rule-builder-rule-value(
         v-if="selectedOperator.nb_inputs === 1"

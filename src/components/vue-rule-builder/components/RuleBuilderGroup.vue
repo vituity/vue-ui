@@ -48,22 +48,20 @@ export default {
 
       return filter
     },
-    changeRule(index, newRule) {
-      console.log('change-rule')
+    changeFilter(index, newFilter) {
+      console.log('change-filter')
       const updatedQuery = deepClone(this.query)
 
       const child = {
         type: 'rule-builder-rule',
-        query: {
-          field: newRule.field,
-          operator: newRule.operators[0],
-          value: null
-        }
+        field: newFilter.field,
+        operator: newFilter.operators[0],
+        value: null
       }
 
-      const op = this.operators[child.query.operator]
+      const op = this.operators[child.operator]
       if (op.multiple || op.nb_inputs >= 2) {
-        child.query.value = []
+        child.value = []
       }
 
       updatedQuery.children[index] = child
@@ -75,15 +73,13 @@ export default {
       const firstFilter = this.filters[0]
       const child = {
         type: 'rule-builder-rule',
-        query: {
-          field: firstFilter.field,
-          operator: firstFilter.operators[0],
-          value: null
-        }
+        field: firstFilter.field,
+        operator: firstFilter.operators[0],
+        value: null
       }
-      const op = this.operators[child.query.operator]
+      const op = this.operators[child.operator]
       if (op.multiple || op.nb_inputs >= 2) {
-        child.query.value = []
+        child.value = []
       }
       const groupIndex = updatedQuery.children.findIndex(x => x.type === 'rule-builder-group')
       if (groupIndex < 0) {
@@ -100,10 +96,10 @@ export default {
       if (this.depth < this.maxDepth) {
         updatedQuery.children.push({
           type: 'rule-builder-group',
-          query: {
-            logicalOperator: this.labels.matchTypes[0].id,
-            children: []
-          }
+
+          logicalOperator: this.labels.matchTypes[0].id,
+          children: []
+
         })
         this.$emit('update:query', updatedQuery)
       }
