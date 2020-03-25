@@ -8,7 +8,7 @@
           span {{ error }}
       .b-control
         button.b-btn.is-success.is-small
-          span Save Query
+          span Save Rule
   .vrb-saved-rules.m-t-10(style="width: fit-content; min-width: 440px")
     .vrb-saved-item.m-b-5.is-flex.align-items-center(v-for="rule in savedRules")
       .b-btn.is-small.is-info(@click='loadRule(rule)')

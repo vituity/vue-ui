@@ -1,14 +1,14 @@
 <template lang="pug">
-  .vue-rule-builder.rules-builder(:class="[isBasic ? 'vrb-basic' : 'vrb-advanced']")
+  .vue-rule-builder(:class="[isBasic ? 'vrb-basic' : 'vrb-advanced']")
     slot(v-bind="vrbProps")
-      rule-builder-group(v-bind="vrbProps" :query.sync="query")
+      rule-builder-group(v-bind="vrbProps" :rule.sync="rule")
     slot(name="toolbar" v-bind="vrbProps")
 
 </template>
 
 <script>
 
-import RuleBuilderGroup from './layouts/Default/DefaultGroup.vue'
+import RuleBuilderGroup from './layouts/Bulma/BulmaRuleGroup.vue'
 import { deepMerge, deepClone } from './utilities.js'
 import { operators, filterTypes } from './defaults.js'
 
@@ -18,8 +18,8 @@ var defaultLabels = {
     { id: 'all', label: 'All' },
     { id: 'any', label: 'Any' }
   ],
-  addRule: 'Add Rule',
-  removeRule: '',
+  addCondition: 'Add Condition',
+  removeCondition: '',
   addGroup: 'Add Group',
   removeGroup: 'Remove Group',
   textInputPlaceholder: 'value'
@@ -62,9 +62,9 @@ export default {
 
   data() {
     return {
-      query: {
+      rule: {
         logicalOperator: this.labels.matchTypes[0].id,
-        children: []
+        conditions: []
       },
       filterTypes
     }
@@ -107,11 +107,11 @@ export default {
   mounted() {
     this.validate()
     this.$watch(
-      'query',
-      (newQuery, oldQuery) => {
-        console.log('query')
-        if (JSON.stringify(newQuery) !== JSON.stringify(this.value)) {
-          this.$emit('input', deepClone(newQuery))
+      'rule',
+      (newRule, oldRule) => {
+        console.log('rule')
+        if (JSON.stringify(newRule) !== JSON.stringify(this.value)) {
+          this.$emit('input', deepClone(newRule))
         }
       }, { deep: true }
     )
@@ -120,20 +120,20 @@ export default {
       'value',
       (newValue, oldValue) => {
         console.log('value')
-        if (!newValue.logicalOperator || !newValue.children) {
+        if (!newValue.logicalOperator || !newValue.conditions) {
           newValue = {
             logicalOperator: this.labels.matchTypes[0].id,
-            children: []
+            conditions: []
           }
         }
-        if (JSON.stringify(newValue) !== JSON.stringify(this.query)) {
-          this.query = deepClone(newValue)
+        if (JSON.stringify(newValue) !== JSON.stringify(this.rule)) {
+          this.rule = deepClone(newValue)
         }
       }, { deep: true }
     )
 
     if (typeof this.$options.propsData.value !== 'undefined') {
-      this.query = Object.assign(this.query, this.$options.propsData.value)
+      this.rule = Object.assign(this.rule, this.$options.propsData.value)
     }
   },
   methods: {

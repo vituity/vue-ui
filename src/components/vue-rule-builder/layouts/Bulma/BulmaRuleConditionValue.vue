@@ -1,5 +1,5 @@
 <template lang="pug">
-  .vrb-rule-input-container
+  .vrb-condition-input-container
     // Unrestricted input
     template(v-if="filter.control === 'input'")
       .b-control(v-if="!operator.multiple")
@@ -47,7 +47,7 @@ import Cleave from '../../extras/CleaveInput'
 
 export default {
 
-  props: ['value', 'filter', 'operator', 'query', 'index', 'depth'],
+  props: ['value', 'filter', 'operator', 'rule', 'index', 'depth'],
   components: { Cleave },
   data() {
     return {

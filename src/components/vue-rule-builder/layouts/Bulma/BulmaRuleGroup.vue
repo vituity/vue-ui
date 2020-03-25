@@ -3,7 +3,7 @@
   .vrb-group-heading(v-if="!isBasic")
     .vrb-match-type
       .b-select.is-small.m-b-5
-        select(v-model='query.logicalOperator')
+        select(v-model='rule.logicalOperator')
           option(v-for='label in labels.matchTypes', :key='label.id', :value='label.id') {{ label.label }} are true
     .vrb-group-heading-buttons
       button.b-btn.is-tiny(v-if="depth > 1", type='button', @click='remove')
@@ -13,10 +13,10 @@
   .vrb-group-body
     rule-builder-children(v-bind='$props')
   .vrb-group-buttons
-    button.m-r-5.b-btn.is-tiny.is-info(type='button', @click='addRule')
+    button.m-r-5.b-btn.is-tiny.is-info(type='button', @click='addCondition')
       .b-icon
         i.fas.fa-plus
-      span {{ labels.addRule }}
+      span {{ labels.addCondition }}
     button.b-btn.is-tiny.is-info.is-inverted(v-if='depth < maxDepth', type='button', @click='addGroup')
       .b-icon
         i.fas.fa-plus-circle
@@ -25,20 +25,20 @@
 
 <script>
 import RuleBuilderGroup from '../../components/RuleBuilderGroup'
-import RuleBuilderRule from './DefaultRule.vue'
+import RuleBuilderCondition from './BulmaRuleCondition.vue'
 
 export default {
   name: 'RuleBuilderGroup',
 
   components: {
-    RuleBuilderRule: RuleBuilderRule
+    RuleBuilderCondition: RuleBuilderCondition
   },
 
   extends: RuleBuilderGroup
 }
 </script>
 <style lang="sass">
-.vrb-rule-value-container
+.vrb-condition-value-container
   @each $name, $pair in $colors
     $color: nth($pair, 1)
     $color-invert: nth($pair, 2)
@@ -56,7 +56,7 @@ export default {
         color: $color-invert
         font-size: 14px
 
-.vrb-group, .vrb-rule
+.vrb-group, .vrb-condition
   position: relative
   margin: 4px 0
   border-radius: 5px
@@ -74,26 +74,26 @@ export default {
     align-items: center
     justify-content: space-between
 
-  .vrb-rule
+  .vrb-condition
     display: flex
 
-  .vrb-rule-form
+  .vrb-condition-form
     flex: 1
     display: flex
 
-  .vrb-remove-rule
+  .vrb-remove-condition
     align-self: center
 
-  .vrb-rule-value-container
+  .vrb-condition-value-container
     flex: 1
     display: flex
 
-  .vrb-rule-filter-container,
-  .vrb-rule-operator-container,
-  .vrb-rule-value-container
+  .vrb-condition-filter-container,
+  .vrb-condition-operator-container,
+  .vrb-condition-value-container
     margin: 0 5px 0 0
 
-  .vrb-rule-input-container
+  .vrb-condition-input-container
     flex: 1
     align-self: center
 

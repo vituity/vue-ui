@@ -3,11 +3,11 @@
   template(v-if="isFloating && !isOpen")
     slot(name="open" v-bind="isOpen")
       .b-btn(@click="isOpen = true")
-        template(v-if="ruleCount === 0")
+        template(v-if="conditionCount === 0")
           .b-icon
             i.fa.fa-filter
           span Add Filter
-        span(v-else) {{ruleCount}} {{ruleCount | pluralize('Condition')}} Selected
+        span(v-else) {{conditionCount}} {{conditionCount | pluralize('Condition')}} Selected
   .rule-builder-wrapper(v-if="!isFloating || isOpen")
     slot(name="rule-builder")
       vue-rule-builder(v-bind="$attrs" v-on="$listeners")
@@ -24,7 +24,7 @@
           .b-btn.is-small.is-success(@click="applyRules") Apply Filter
     slot(name="save-manager")
       template(v-if="showSaveManager")
-        DefaultSaveManager.m-t-10(
+        BulmaRuleSaveManager.m-t-10(
             v-bind="$attrs"
             v-on="$listeners"
             :savedRules.sync="savedRules"
@@ -56,12 +56,12 @@ export default {
     }
   },
   computed: {
-    query() {
-      return this.$attrs.query
+    rule() {
+      return this.$attrs.rule
     },
-    ruleCount() {
-      if (!this.query.children) return 0
-      return this.query.children.length
+    conditionCount() {
+      if (!this.rule.conditions) return 0
+      return this.rule.conditions.length
     }
   },
   watch: {
@@ -110,22 +110,22 @@ export default {
       this.showSaveManager = true
     },
     applyRules() {
-      this.$emit('input', this.query)
+      this.$emit('input', this.rule)
       this.close()
     },
-    onRuleSaved(rule) {
-      console.log('save', rule)
-      this.savedRules.push(rule)
+    onRuleSaved(ruleSet) {
+      console.log('save', ruleSet)
+      this.savedRules.push(ruleSet)
       this.saveToLocalStorage()
     },
-    onRuleDeleted(rule) {
-      const ix = this.savedRules.indexOf(rule)
+    onRuleDeleted(ruleSet) {
+      const ix = this.savedRules.indexOf(ruleSet)
       this.savedRules.splice(ix, 1)
       this.saveToLocalStorage()
     },
-    onRuleLoaded(rule) {
-      console.log('load', rule)
-      this.$emit('input', deepClone(rule.query))
+    onRuleLoaded(ruleSet) {
+      console.log('load', ruleSet)
+      this.$emit('input', deepClone(ruleSet.rule))
     }
   }
 }

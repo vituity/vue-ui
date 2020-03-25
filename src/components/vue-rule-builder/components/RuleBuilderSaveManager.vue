@@ -6,7 +6,7 @@
 import { deepClone } from '../utilities.js'
 export default {
   props: {
-    query: {
+    rule: {
       type: Object,
       required: true
     },
@@ -48,7 +48,7 @@ export default {
         this.error = 'A rule with this name already exists.'
         return
       }
-      const ruleSet = { name: name, query: deepClone(this.query) }
+      const ruleSet = { name: name, rule: deepClone(this.rule) }
       this.$emit('save', ruleSet)
       this.name = null
     },

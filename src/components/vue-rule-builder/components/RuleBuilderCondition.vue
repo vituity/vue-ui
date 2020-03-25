@@ -7,7 +7,7 @@ import { deepClone } from '../utilities.js'
 
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['query', 'index', 'filter', 'labels', 'depth', 'filters', 'operators'],
+  props: ['rule', 'index', 'filter', 'labels', 'depth', 'filters', 'operators'],
   data() {
     return {
     }
@@ -23,13 +23,13 @@ export default {
     },
     operator: {
       get() {
-        return this.query.operator
+        return this.rule.operator
       },
       set(v) {
         this.changeOperator(v, this.operator)
       }
     },
-    selectedOperator() {
+    operatorInfo() {
       return this.operators[this.operator]
     },
     isCustomComponent() {
@@ -44,9 +44,9 @@ export default {
       const newOp = this.operators[newVal]
       const oldOp = this.operators[oldVal]
       if (oldOp && newOp && oldOp.multiple === newOp.multiple && oldOp.nb_inputs === newOp.nb_inputs) {
-        this.updateQuery(newVal, this.query.value)
+        this.updateRule(newVal, this.rule.value)
       } else {
-        this.updateQuery(newVal, this.getDefaultValueForOperator(newOp))
+        this.updateRule(newVal, this.getDefaultValueForOperator(newOp))
       }
     },
     getDefaultValueForOperator(op) {
@@ -59,11 +59,11 @@ export default {
     remove: function () {
       this.$emit('child-deletion-requested', this.index)
     },
-    updateQuery(op, value) {
-      const updateQuery = deepClone(this.query)
-      updateQuery.operator = op
-      updateQuery.value = value
-      this.$emit('update:query', updateQuery)
+    updateRule(op, value) {
+      const updateRule = deepClone(this.rule)
+      updateRule.operator = op
+      updateRule.value = value
+      this.$emit('update:rule', updateRule)
     }
   }
 }

@@ -2,10 +2,10 @@
   <div class="vrb-children">
     <component
       :is="getComponent(child.type)"
-      v-for="(child, index) in query.children"
+      v-for="(child, index) in rule.conditions"
       :key="getKey(child, index)"
       :type="child.type"
-      :query.sync="query.children[index]"
+      :rule.sync="rule.conditions[index]"
       :filterTypes="filterTypes"
       :filters="filters"
       :filter="$parent.filterById(child.field)"
@@ -23,24 +23,24 @@
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['query', 'filterTypes', 'filters', 'maxDepth', 'labels', 'operators', 'depth'],
+  props: ['rule', 'filterTypes', 'filters', 'maxDepth', 'labels', 'operators', 'depth'],
 
   data() {
     return {
-      groupComponent: null,
-      ruleComponent: null
+      ruleGroupComponent: null,
+      ruleConditionComponent: null
     }
   },
   mounted() {
-    this.groupComponent = this.$parent.$options.components.RuleBuilderGroup
-    this.ruleComponent = this.$parent.$options.components.RuleBuilderRule
+    this.ruleGroupComponent = this.$parent.$options.components.RuleBuilderGroup
+    this.ruleConditionComponent = this.$parent.$options.components.RuleBuilderCondition
   },
 
   methods: {
     getComponent(type) {
       return type === 'rule-builder-group'
-        ? this.groupComponent
-        : this.ruleComponent
+        ? this.ruleGroupComponent
+        : this.ruleConditionComponent
     },
     getKey(child, index) {
       return (child.field || child.type) + '_' + index

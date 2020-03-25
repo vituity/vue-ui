@@ -1,26 +1,25 @@
 <template lang="pug">
 page(title='Rule Builder')
   .page--body
-    //- h4 Floating
-    //- vituity-rule-builder(
-    //-   v-model="query"
-    //-   :isFloating="true"
-    //-   :filters="filters"
-    //-   :maxDepth="1"
-    //-   :isBasic="true"
-    //-   :query="query"
-    //-   namespace="example.basic"
-
-    //- )
-    h4.m-t-20 Custom
-    vue-rule-builder(
-        :filters="filters"
-        :maxDepth="3"
-        v-model="query"
-      )
+    h4 Floating
+    vituity-rule-builder(
+      v-model="rule"
+      :isFloating="true"
+      :filters="filters"
+      :maxDepth="1"
+      :isBasic="true"
+      :rule="rule"
+      namespace="example.basic"
+    )
+    //- h4.m-t-20 Custom
+    //- vue-rule-builder(
+    //-     :filters="filters"
+    //-     :maxDepth="3"
+    //-     v-model="rule"
+    //-   )
     //- DefaultSaveManager(
     //-     :savedRules.sync="savedRules"
-    //-     :query="query"
+    //-     :rule="rule"
     //-     namespace="example.basic"
     //-     @save="onRuleSaved"
     //-     @load="onRuleLoaded"
@@ -103,11 +102,11 @@ const filters = [
   }
 ]
 
-const defaultQuery = {
+const defaultRule = {
   logicalOperator: 'all',
-  children: [
+  conditions: [
     {
-      type: 'rule-builder-rule',
+      type: 'rule-builder-condition',
 
       field: 'name',
       operator: 'in',
@@ -118,7 +117,7 @@ const defaultQuery = {
 
     },
     {
-      type: 'rule-builder-rule',
+      type: 'rule-builder-condition',
 
       field: 'price',
       operator: 'in',
@@ -133,14 +132,14 @@ export default {
   },
   data() {
     return {
-      query: defaultQuery,
+      rule: defaultRule,
       filters: filters,
       savedRules: []
     }
   },
   computed: {
     outputFormatted() {
-      return JSON.stringify(this.query, null, 2)
+      return JSON.stringify(this.rule, null, 2)
     }
   },
   methods: {
