@@ -1,8 +1,8 @@
 <template lang="pug">
 .vituity-rule-builder(:class="{'is-floating': isFloating}")
   template(v-if="isFloating && !isOpen")
-    slot(name="open" v-bind="isOpen")
-      .b-btn(@click="isOpen = true")
+    slot(name="open")
+      .b-btn(@click="isOpen = true" :class="floatingButtonClass")
         template(v-if="conditionCount === 0")
           .b-icon
             i.fa.fa-filter
@@ -45,8 +45,11 @@ const api = axios.create({
 export default {
   inheritAttrs: false,
   props: {
-    isFloating: Boolean,
-    default: () => false
+    isFloating: {
+      type: Boolean,
+      default: () => false
+    },
+    floatingButtonClass: String
   },
   data: function () {
     return {

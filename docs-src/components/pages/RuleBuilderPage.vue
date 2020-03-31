@@ -9,6 +9,7 @@ page(title='Rule Builder')
       :maxDepth="1"
       :isBasic="true"
       :rule="rule"
+      floatingButtonClass="is-rounded is-info is-outlined"
       namespace="example.basic"
     )
     h4.m-t-20 Custom
