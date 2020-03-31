@@ -6,7 +6,7 @@
         select(v-model='rule.logicalOperator')
           option(v-for='label in labels.matchTypes', :key='label.id', :value='label.id') {{ label.label }} are true
     .vrb-group-heading-buttons
-      button.b-btn.is-tiny(v-if="depth > 1", type='button', @click='remove')
+      button.b-btn.is-danger.is-inverted.is-tiny(v-if="depth > 1", type='button', @click='remove')
         .b-icon
           i.fas.fa-minus-circle
         span {{labels.removeGroup}}
@@ -58,15 +58,14 @@ export default {
 
 .vrb-group, .vrb-condition
   position: relative
-  margin: 4px 0
+  margin: 3px 0
   border-radius: 5px
-  padding: 5px
-  border: 1px solid #eee
-  background: rgba(255, 255, 255, 0.9)
+  // padding: 5px
+  // border: 1px solid #eee
+  // background: rgba(255, 255, 255, 0.9)
 
 .vrb-group
-  padding: 10px
-  padding-bottom: 6px
+  padding: 6px
   border: 1px solid #d9d9d9
   background: whitesmoke
   .vrb-group-heading
@@ -91,14 +90,17 @@ export default {
   .vrb-condition-filter-container,
   .vrb-condition-operator-container,
   .vrb-condition-value-container
-    margin: 0 5px 0 0
+    margin: 0 4px 0 0
+
+  .vrb-condition-operator-container
+    select
+      width: 165px
 
   .vrb-condition-input-container
     flex: 1
     align-self: center
 
   .vrb-group-buttons
-    margin-left: 15px
     .vrb-basic &
       margin: 0
 
@@ -115,6 +117,8 @@ export default {
       height: calc(50% + 4px)
       border-color: #ccc
       border-style: solid
+    .vrb-group::before
+      left: -11px
     >  ::before
       top: -4px
       border-width: 0 0 2px 2px
@@ -122,8 +126,8 @@ export default {
       top: 50%
       border-width: 0 0 0 2px
     > :first-child::before
-      top: -12px
-      height: calc(50% + 14px)
+      top: -8px
+      height: calc(50% + 10px)
     > :last-child::before
       border-radius: 0 0 0 4px
     > :last-child::after

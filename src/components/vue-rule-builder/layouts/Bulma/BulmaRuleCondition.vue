@@ -12,7 +12,7 @@
       .b-control(v-if="typeof filter.operators !== 'undefined' && filter.operators.length > 1")
         .b-select
           select(v-model='operator')
-            option(v-for='op in filter.operators', :key='op', :value='op') {{ op }}
+            option(v-for='op in filter.operators', :key='op', :value='op') {{ op.replace(/_/g,' ') }}
     .vrb-condition-value-container.is-info
       rule-builder-condition-value(
         v-if="operatorInfo.nb_inputs === 1"

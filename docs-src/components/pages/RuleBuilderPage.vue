@@ -11,20 +11,20 @@ page(title='Rule Builder')
       :rule="rule"
       namespace="example.basic"
     )
-    //- h4.m-t-20 Custom
-    //- vue-rule-builder(
-    //-     :filters="filters"
-    //-     :maxDepth="3"
-    //-     v-model="rule"
-    //-   )
-    //- DefaultSaveManager(
-    //-     :savedRules.sync="savedRules"
-    //-     :rule="rule"
-    //-     namespace="example.basic"
-    //-     @save="onRuleSaved"
-    //-     @load="onRuleLoaded"
-    //-     @delete="onRuleDeleted"
-    //-   )
+    h4.m-t-20 Custom
+    vue-rule-builder(
+        :filters="filters"
+        :maxDepth="3"
+        v-model="rule"
+      )
+    BulmaRuleSaveManager(
+        :savedRules.sync="savedRules"
+        :rule="rule"
+        namespace="example.basic"
+        @save="onRuleSaved"
+        @load="onRuleLoaded"
+        @delete="onRuleDeleted"
+      )
     br
     p
       pre {{ outputFormatted }}
@@ -106,8 +106,6 @@ const defaultRule = {
   logicalOperator: 'all',
   conditions: [
     {
-      type: 'rule-builder-condition',
-
       field: 'name',
       operator: 'in',
       value: [
@@ -117,12 +115,9 @@ const defaultRule = {
 
     },
     {
-      type: 'rule-builder-condition',
-
       field: 'price',
       operator: 'in',
       value: [25.30]
-
     }
   ]
 }

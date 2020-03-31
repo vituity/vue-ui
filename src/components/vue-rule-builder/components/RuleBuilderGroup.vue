@@ -15,10 +15,6 @@ export default {
 
   props: {
     filterTypes: Object,
-    type: {
-      type: String,
-      default: 'rule-builder-group'
-    },
     rule: Object,
     filters: Array,
     index: Number,
@@ -31,7 +27,6 @@ export default {
 
   data() {
     return {
-      // selectedRule: null
     }
   },
 
@@ -53,7 +48,6 @@ export default {
       const updatedRule = deepClone(this.rule)
 
       const child = {
-        type: 'rule-builder-condition',
         field: newFilter.field,
         operator: newFilter.operators[0],
         value: null
@@ -72,7 +66,6 @@ export default {
       const updatedRule = deepClone(this.rule)
       const firstFilter = this.filters[0]
       const child = {
-        type: 'rule-builder-condition',
         field: firstFilter.field,
         operator: firstFilter.operators[0],
         value: null
@@ -81,7 +74,7 @@ export default {
       if (op.multiple || op.nb_inputs >= 2) {
         child.value = []
       }
-      const groupIndex = updatedRule.conditions.findIndex(x => x.type === 'rule-builder-group')
+      const groupIndex = updatedRule.conditions.findIndex(x => Array.isArray(x.conditions))
       if (groupIndex < 0) {
         updatedRule.conditions.push(child)
       } else {
@@ -95,11 +88,8 @@ export default {
       const updatedRule = deepClone(this.rule)
       if (this.depth < this.maxDepth) {
         updatedRule.conditions.push({
-          type: 'rule-builder-group',
-
           logicalOperator: this.labels.matchTypes[0].id,
           conditions: []
-
         })
         this.$emit('update:rule', updatedRule)
       }

@@ -9,7 +9,7 @@
           span Add Filter
         span(v-else) {{conditionCount}} {{conditionCount | pluralize('Condition')}} Selected
   .rule-builder-wrapper(v-if="!isFloating || isOpen")
-    slot(name="rule-builder")
+    slot(name="builder")
       vue-rule-builder(v-bind="$attrs" v-on="$listeners")
     slot(name="toolbar")
       .v-flex.m-t-10
@@ -93,11 +93,13 @@ export default {
     },
     open() {
       this.isOpen = true
+      this.$emit('opened')
     },
     close() {
       if (!this.isFloating) { return }
       this.closeSaveManager()
       this.isOpen = false
+      this.$emit('closed')
     },
     clearRules() {
       this.$emit('input', {})

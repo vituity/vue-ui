@@ -1,10 +1,9 @@
 <template>
   <div class="vrb-children">
     <component
-      :is="getComponent(child.type)"
+      :is="getComponent(child)"
       v-for="(child, index) in rule.conditions"
       :key="getKey(child, index)"
-      :type="child.type"
       :rule.sync="rule.conditions[index]"
       :filterTypes="filterTypes"
       :filters="filters"
@@ -37,13 +36,13 @@ export default {
   },
 
   methods: {
-    getComponent(type) {
-      return type === 'rule-builder-group'
+    getComponent(child) {
+      return Array.isArray(child.conditions)
         ? this.ruleGroupComponent
         : this.ruleConditionComponent
     },
     getKey(child, index) {
-      return (child.field || child.type) + '_' + index
+      return (child.field || 'group') + '_' + index
     }
   }
 }
