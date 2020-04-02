@@ -109,7 +109,6 @@ export default {
     this.$watch(
       'rule',
       (newRule, oldRule) => {
-        console.log('rule')
         if (JSON.stringify(newRule) !== JSON.stringify(this.value)) {
           this.$emit('input', deepClone(newRule))
         }
@@ -119,7 +118,6 @@ export default {
     this.$watch(
       'value',
       (newValue, oldValue) => {
-        console.log('value')
         if (!newValue.logicalOperator || !newValue.conditions) {
           newValue = {
             logicalOperator: this.labels.matchTypes[0].id,
@@ -141,6 +139,7 @@ export default {
       this.mergedFilters.forEach(r => {
         r.operators.forEach(o => {
           if (!this.mergedOperators[o]) {
+            // eslint-disable-next-line no-console
             console.error(`Invalid operator '${o}' found in filter`, r)
           }
         })

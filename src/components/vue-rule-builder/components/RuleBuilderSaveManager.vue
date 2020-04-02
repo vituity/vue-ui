@@ -16,6 +16,7 @@ export default {
       validator: function (val) {
         var result = val.split('.').every(x => /^[a-z][a-z0-9-]{2,}$/i.test(x))
         if (!result) {
+          // eslint-disable-next-line no-console
           console.error('Namespace must start with letter and only include letters, numbers and hypen')
         }
         return result

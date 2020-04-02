@@ -40,7 +40,6 @@ export default {
   methods: {
 
     changeOperator(newVal, oldVal) {
-      console.log('change-operator', newVal, oldVal)
       const newOp = this.operators[newVal]
       const oldOp = this.operators[oldVal]
       if (oldOp && newOp && oldOp.multiple === newOp.multiple && oldOp.nb_inputs === newOp.nb_inputs) {

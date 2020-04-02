@@ -35,12 +35,12 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { deepMerge, deepClone } from './utilities.js'
-const api = axios.create({
-  baseURL: 'localhost:',
-  withCredentials: true
-})
+// import axios from 'axios'
+import { deepClone } from './utilities.js'
+// const api = axios.create({
+//   baseURL: 'localhost:',
+//   withCredentials: true
+// })
 
 export default {
   inheritAttrs: false,
@@ -119,7 +119,6 @@ export default {
       this.close()
     },
     onRuleSaved(ruleSet) {
-      console.log('save', ruleSet)
       this.savedRules.push(ruleSet)
       this.saveToLocalStorage()
     },
@@ -129,7 +128,6 @@ export default {
       this.saveToLocalStorage()
     },
     onRuleLoaded(ruleSet) {
-      console.log('load', ruleSet)
       this.$emit('input', deepClone(ruleSet.rule))
     }
   }

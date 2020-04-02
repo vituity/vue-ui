@@ -27,7 +27,6 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
-import { validator } from '../utilities'
 import Cleave from 'cleave.js'
 
 export default {

@@ -44,7 +44,6 @@ export default {
       return filter
     },
     changeFilter(index, newFilter) {
-      console.log('change-filter')
       const updatedRule = deepClone(this.rule)
 
       const child = {
@@ -62,7 +61,6 @@ export default {
       this.$emit('update:rule', updatedRule)
     },
     addCondition() {
-      console.log('add-condition')
       const updatedRule = deepClone(this.rule)
       const firstFilter = this.filters[0]
       const child = {
@@ -84,7 +82,6 @@ export default {
     },
 
     addGroup() {
-      console.log('add-group')
       const updatedRule = deepClone(this.rule)
       if (this.depth < this.maxDepth) {
         updatedRule.conditions.push({
@@ -96,12 +93,10 @@ export default {
     },
 
     remove() {
-      console.log('remove')
       this.$emit('child-deletion-requested', this.index)
     },
 
     removeChild(index) {
-      console.log('remove-child')
       const updatedRule = deepClone(this.rule)
       updatedRule.conditions.splice(index, 1)
       this.$emit('update:rule', updatedRule)

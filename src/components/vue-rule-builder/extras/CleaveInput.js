@@ -50,7 +50,6 @@ export default {
       const newOptions = Object.assign({}, options, {
         onValueChanged: this.onValueChanged
       })
-      console.log(newOptions)
       return newOptions
     },
     onValueChanged(event) {
