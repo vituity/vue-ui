@@ -1,6 +1,6 @@
 <template lang="pug">
 .vituity-rule-builder(:class="{'is-floating': isFloating}")
-  template(v-if="isFloating && !isOpen")
+  template(v-if="isFloating")
     slot(name="open")
       .b-btn(@click="isOpen = true" :class="floatingButtonClass")
         template(v-if="conditionCount === 0")
