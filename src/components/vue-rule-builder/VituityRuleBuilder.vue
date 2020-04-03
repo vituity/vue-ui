@@ -110,15 +110,15 @@ export default {
       this.$emit('input', {})
       this.close()
     },
+    applyRules() {
+      this.$emit('on-apply', this.rule)
+      this.close()
+    },
     closeSaveManager() {
       this.showSaveManager = false
     },
     openSaveManager() {
       this.showSaveManager = true
-    },
-    applyRules() {
-      this.$emit('input', this.rule)
-      this.close()
     },
     onRuleSaved(ruleSet) {
       this.savedRules.push(ruleSet)
