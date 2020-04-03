@@ -8,7 +8,6 @@ page(title='Rule Builder')
       :filters="filters"
       :maxDepth="1"
       :isBasic="true"
-      :rule="rule"
       floatingButtonClass="is-rounded is-info is-outlined"
       namespace="example.basic"
     )
