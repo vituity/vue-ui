@@ -1,5 +1,6 @@
 <template lang="pug">
   .vue-rule-builder(:class="[isBasic ? 'vrb-basic' : 'vrb-advanced']")
+    slot(name="top" v-bind="vrbProps")
     slot(v-bind="vrbProps")
       rule-builder-group(v-bind="vrbProps" :rule.sync="rule")
     slot(name="toolbar" v-bind="vrbProps")
@@ -15,8 +16,8 @@ import { operators, filterTypes } from './defaults.js'
 var defaultLabels = {
   matchType: 'Match Type',
   matchTypes: [
-    { id: 'all', label: 'All' },
-    { id: 'any', label: 'Any' }
+    { id: 'AND', label: 'All' },
+    { id: 'OR', label: 'Any' }
   ],
   addCondition: 'Add Condition',
   removeCondition: '',
@@ -109,6 +110,12 @@ export default {
     this.$watch(
       'rule',
       (newRule, oldRule) => {
+        if (!Array.isArray(newRule.conditions)) {
+          newRule = {
+            logicalOperator: this.labels.matchTypes[0].id,
+            conditions: []
+          }
+        }
         if (JSON.stringify(newRule) !== JSON.stringify(this.value)) {
           this.$emit('input', deepClone(newRule))
         }
@@ -118,18 +125,11 @@ export default {
     this.$watch(
       'value',
       (newValue, oldValue) => {
-        if (!newValue.logicalOperator || !newValue.conditions) {
-          newValue = {
-            logicalOperator: this.labels.matchTypes[0].id,
-            conditions: []
-          }
-        }
         if (JSON.stringify(newValue) !== JSON.stringify(this.rule)) {
           this.rule = deepClone(newValue)
         }
       }, { deep: true }
     )
-
     if (typeof this.$options.propsData.value !== 'undefined') {
       this.rule = Object.assign(this.rule, this.$options.propsData.value)
     }

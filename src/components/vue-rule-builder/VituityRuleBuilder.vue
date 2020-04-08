@@ -11,6 +11,8 @@
   .rule-builder-wrapper(v-if="!isFloating || isOpen")
     slot(name="builder")
       vue-rule-builder(v-bind="$attrs" v-on="$listeners")
+        template(slot="top")
+          slot(name="top")
     slot(name="toolbar")
       .v-flex.m-t-10
         .b-btn.is-info.is-outlined.is-small(@click="showSaveManager = !showSaveManager")
@@ -27,6 +29,7 @@
         BulmaRuleSaveManager.m-t-10(
             v-bind="$attrs"
             v-on="$listeners"
+            :rule="rule"
             :savedRules.sync="savedRules"
             @save="onRuleSaved"
             @load="onRuleLoaded"
@@ -60,7 +63,7 @@ export default {
   },
   computed: {
     rule() {
-      return this.$attrs.rule
+      return this.$attrs.value
     },
     conditionCount() {
       if (!this.rule.conditions) return 0
@@ -100,7 +103,6 @@ export default {
     },
     close() {
       if (!this.isFloating) { return }
-      this.closeSaveManager()
       this.isOpen = false
       this.$emit('closed')
     },
@@ -108,15 +110,15 @@ export default {
       this.$emit('input', {})
       this.close()
     },
+    applyRules() {
+      this.$emit('on-apply', this.rule)
+      this.close()
+    },
     closeSaveManager() {
       this.showSaveManager = false
     },
     openSaveManager() {
       this.showSaveManager = true
-    },
-    applyRules() {
-      this.$emit('input', this.rule)
-      this.close()
     },
     onRuleSaved(ruleSet) {
       this.savedRules.push(ruleSet)

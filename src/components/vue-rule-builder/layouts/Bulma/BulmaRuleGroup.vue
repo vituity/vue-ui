@@ -68,6 +68,7 @@ export default {
   padding: 6px
   border: 1px solid #d9d9d9
   background: whitesmoke
+
   .vrb-group-heading
     display: flex
     align-items: center
