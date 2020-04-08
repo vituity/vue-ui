@@ -16,7 +16,7 @@
     "dist_electron": true
   },
   "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "html.format.endWithNewline": true,
   "vetur.format.defaultFormatter.js": "vscode-typescript",
   "editor.codeActionsOnSave": {
