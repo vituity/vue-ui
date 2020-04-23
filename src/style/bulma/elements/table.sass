@@ -117,7 +117,7 @@ $table-striped-row-even-hover-background-color: $scheme-main-ter !default
     td,
     th
       padding: 0.25em 0.5em
-  &.is-compact // added
+  &.is-compact // custom
     td,
     th
       padding: 0.25em 0.5em
@@ -129,6 +129,9 @@ $table-striped-row-even-hover-background-color: $scheme-main-ter !default
       tr:not(.is-selected)
         &:nth-child(even)
           background-color: $table-striped-row-even-background-color
+  &.is-striped-tbody // custom
+    tbody:nth-child(even)
+      background-color: $table-striped-row-even-background-color
 
 .b-table-container
   @extend %block

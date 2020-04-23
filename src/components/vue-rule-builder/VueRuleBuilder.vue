@@ -16,8 +16,8 @@ import { operators, filterTypes } from './defaults.js'
 var defaultLabels = {
   matchType: 'Match Type',
   matchTypes: [
-    { id: 'all', label: 'All' },
-    { id: 'any', label: 'Any' }
+    { id: 'AND', label: 'All' },
+    { id: 'OR', label: 'Any' }
   ],
   addCondition: 'Add Condition',
   removeCondition: '',
