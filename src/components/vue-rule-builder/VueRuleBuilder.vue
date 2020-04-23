@@ -106,7 +106,6 @@ export default {
     }
   },
   mounted() {
-    this.validate()
     this.$watch(
       'rule',
       (newRule, oldRule) => {
@@ -121,20 +120,27 @@ export default {
         }
       }, { deep: true }
     )
-
     this.$watch(
       'value',
       (newValue, oldValue) => {
-        if (JSON.stringify(newValue) !== JSON.stringify(this.rule)) {
+        var cleanValue = this.cleanValue(newValue)
+        if (cleanValue !== newValue) {
+          this.rule = cleanValue
+        } else if (JSON.stringify(newValue) !== JSON.stringify(this.rule)) {
           this.rule = deepClone(newValue)
         }
       }, { deep: true }
     )
+
     if (typeof this.$options.propsData.value !== 'undefined') {
       this.rule = Object.assign(this.rule, this.$options.propsData.value)
     }
   },
   methods: {
+    cleanValue(value) {
+      // todo verify vlaues
+      return value
+    },
     validate() {
       this.mergedFilters.forEach(r => {
         r.operators.forEach(o => {

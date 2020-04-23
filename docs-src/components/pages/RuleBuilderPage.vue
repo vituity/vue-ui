@@ -9,25 +9,28 @@ page(title='Rule Builder')
       :maxDepth="1"
       :isBasic="true"
       floatingButtonClass="is-rounded is-info is-outlined"
-      namespace="example.basic"
+      namespace="example.basic",
+      @save="onRuleSaved"
+      @load="onRuleLoaded"
+      @delete="onRuleDeleted"
     )
     h4.m-t-20 Custom
-    vue-rule-builder(
-        :filters="filters"
-        :maxDepth="3"
-        v-model="rule"
-      )
-    BulmaRuleSaveManager(
-        :savedRules.sync="savedRules"
-        :rule="rule"
-        namespace="example.basic"
-        @save="onRuleSaved"
-        @load="onRuleLoaded"
-        @delete="onRuleDeleted"
-      )
-    br
+    //- vue-rule-builder(
+    //-     :filters="filters"
+    //-     :maxDepth="3"
+    //-     v-model="rule"
+    //-   )
+    //- BulmaRuleSaveManager(
+    //-     :savedRules.sync="savedRules"
+    //-     :rule="rule"
+    //-     namespace="example.basic"
+    //-     @save="onRuleSaved"
+    //-     @load="onRuleLoaded"
+    //-     @delete="onRuleDeleted"
+    //-   )
+    //- br
     p
-      pre {{ outputFormatted }}
+    pre {{ outputFormatted }}
 
 </template>
 
@@ -127,7 +130,7 @@ export default {
   },
   data() {
     return {
-      rule: defaultRule,
+      rule: {},
       filters: filters,
       savedRules: []
     }
@@ -139,13 +142,13 @@ export default {
   },
   methods: {
     onRuleSaved(rule) {
-      console.log('save', rule)
+      console.log('save 2', rule)
     },
     onRuleDeleted(rule) {
-      console.log('delete', rule)
+      console.log('delete 2', rule)
     },
     onRuleLoaded(rule) {
-      console.log('load', rule)
+      console.log('load 2', rule)
     }
   }
 }

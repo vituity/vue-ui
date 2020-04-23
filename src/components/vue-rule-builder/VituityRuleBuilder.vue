@@ -61,6 +61,13 @@ export default {
       showSaveManager: false
     }
   },
+  created() {
+    if (this.rule && Array.isArray(this.rule.conditions)) { return }
+    const lastRule = this.loadLastRule()
+    if (lastRule) {
+      this.$emit('input', lastRule)
+    }
+  },
   computed: {
     rule() {
       return this.$attrs.value
@@ -68,6 +75,9 @@ export default {
     conditionCount() {
       if (!this.rule.conditions) return 0
       return this.rule.conditions.length
+    },
+    namespace() {
+      return this.$attrs.namespace
     }
   },
   watch: {
@@ -81,11 +91,12 @@ export default {
   methods: {
     async loadSavedQueries() {
       this.savedRules = this.loadFromLocalStorage()
+
       // const results = await api.get(`rules/${this.namespace}`)
       // this.savedRules[this.namespace] = results.data
     },
     loadFromLocalStorage() {
-      var string = localStorage.getItem(`rules.${this.namespace}`)
+      var string = localStorage.getItem(`rules.${this.namespace}.user`)
       if (string) {
         try {
           return JSON.parse(string)
@@ -95,7 +106,7 @@ export default {
       return []
     },
     saveToLocalStorage() {
-      localStorage.setItem(`rules.${this.namespace}`, JSON.stringify(this.savedRules))
+      localStorage.setItem(`rules.${this.namespace}.user`, JSON.stringify(this.savedRules))
     },
     open() {
       this.isOpen = true
@@ -108,9 +119,27 @@ export default {
     },
     clearRules() {
       this.$emit('input', {})
+      this.clearCachedRule()
       this.close()
     },
+    loadLastRule() {
+      var string = localStorage.getItem(`rules.${this.namespace}.current`)
+      if (string) {
+        try {
+          return JSON.parse(string)
+        } catch {
+        }
+      }
+      return null
+    },
+    clearCachedRule() {
+      localStorage.removeItem(`rules.${this.namespace}.current`)
+    },
+    cacheLastRule() {
+      localStorage.setItem(`rules.${this.namespace}.current`, JSON.stringify(this.rule))
+    },
     applyRules() {
+      this.cacheLastRule()
       this.$emit('on-apply', this.rule)
       this.close()
     },
