@@ -44,6 +44,12 @@ import { deepClone } from './utilities.js'
 //   baseURL: 'localhost:',
 //   withCredentials: true
 // })
+function GetDefaultRule() {
+  return {
+    logicalOperator: 'AND',
+    conditions: []
+  }
+}
 
 export default {
   inheritAttrs: false,
@@ -67,10 +73,7 @@ export default {
     if (lastRule && Array.isArray(lastRule.conditions)) {
       this.$emit('input', lastRule)
     } else {
-      this.$emit('input', {
-        logicalOperator: 'all',
-        conditions: []
-      })
+      this.$emit('input', GetDefaultRule())
     }
   },
   computed: {
@@ -123,9 +126,8 @@ export default {
       this.$emit('closed')
     },
     clearRules() {
-      this.$emit('input', {})
+      this.$emit('input', GetDefaultRule())
       this.clearCachedRule()
-      this.close()
     },
     loadLastRule() {
       var string = localStorage.getItem(`rules.${this.namespace}.current`)
