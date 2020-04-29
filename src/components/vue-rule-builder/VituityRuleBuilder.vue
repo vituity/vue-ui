@@ -64,8 +64,13 @@ export default {
   created() {
     if (this.rule && Array.isArray(this.rule.conditions)) { return }
     const lastRule = this.loadLastRule()
-    if (lastRule) {
+    if (lastRule && Array.isArray(lastRule.conditions)) {
       this.$emit('input', lastRule)
+    } else {
+      this.$emit('input', {
+        logicalOperator: 'all',
+        conditions: []
+      })
     }
   },
   computed: {
