@@ -15,26 +15,27 @@
         a.b-btn.is-small(@click="showLogs = false")
           .b-icon.is-small
             i.fas.fa-times
-      .logs
-        .logger-message.last-message(v-for="log in $log.logs" :class="log.type")
+      .logs(ref="logList")
+        .logger-message.last-message(v-for="log in logs" :class="log.type")
+          // .log-timestamp {{log.date | date('HH:mm:ss')}}
           .v-label(:class="{'is-info': log.type === 'info', 'is-warning': log.type === 'warn', 'is-danger': log.type === 'error', 'is-success': log.type === 'done'}")
             | {{log.type.toUpperCase()}}
-          .log-message
+          .log-timestamp.m-l-5 {{log.date | date('HH:mm:ss')}}
+          .log-message.m-l-10
             | {{log.message}}
-          .date
-            | {{log.date | date}}
+          //- .date
+          //-   | {{log.date | date}}
     .context
-      .section.action.console-log(@click="showLogs = !showLogs")
+      .section.action.console-log(@click="toggleLogs()")
         .b-icon
           i.far.fa-list-alt
         .last-message-container.m-l-4
           .logger-message.last-message(v-if="lastLog" :class="lastLog.type")
             .v-label(:class="{'is-info': lastLog.type === 'info', 'is-warning': lastLog.type === 'warn', 'is-danger': lastLog.type === 'error', 'is-success': lastLog.type === 'done'}")
               | {{lastLog.type.toUpperCase()}}
-            .log-message
+            .log-timestamp.m-l-5 {{lastLog.date | date('HH:mm:ss')}}
+            .log-message.m-l-10
               | {{lastLog.message}}
-            .date
-              | {{lastLog.date | date}}
 </template>
 
 <script>
@@ -46,9 +47,35 @@ export default {
       isPinned: true
     }
   },
+  created() {
+    this.$watch('logs', () => {
+      this.scrollToBottom()
+    })
+  },
   computed: {
     lastLog() {
-      return this.$log.logs[this.$log.logs.length - 1]
+      return this.logs[this.logs.length - 1]
+    },
+    logs() {
+      return this.$log.logs || []
+    }
+  },
+  methods: {
+    scrollToBottom() {
+      if (this.showLogs) {
+        this.$nextTick(() => {
+          const el = this.$refs.logList
+          if (el) {
+            el.lastChild.scrollIntoView()
+          }
+        })
+      }
+    },
+    toggleLogs() {
+      this.showLogs = !this.showLogs
+      if (this.showLogs) {
+        this.scrollToBottom()
+      }
     }
   }
 }
@@ -135,11 +162,12 @@ export default {
       flex: auto 0 0
     .log-message
       flex: 100% 1 1
-      margin-left: 12px
       width: 0
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+  .log-timestamp
+    opacity: .7
 
 .v-statusbar.un-pinned
   .logger-view
