@@ -3,6 +3,11 @@ Page(title="Buttons" subTitle="look at all the fancy buttons")
   .page--body
     .b-box
       .b-box-header
+        | Switches
+      input.switch(type="checkbox" name="ex1" checked="checked")
+      label(for="ex1")
+    .b-box
+      .b-box-header
         | Colors
       .b-btns
         .b-btn(v-for="color in color1" :class="['is-'+color]") {{color}}

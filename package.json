@@ -1,7 +1,7 @@
 {
   "name": "@vituity/vue-ui",
   "description": "UI components used in the oranization",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": false,
   "author": {
     "name": "Matt Overall",
