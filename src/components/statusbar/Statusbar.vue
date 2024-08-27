@@ -1,5 +1,5 @@
 <template lang="pug">
-  .v-statusbar.is-info(:class="{'un-pinned': !isPinned}")
+.v-statusbar.is-info(:class="{'un-pinned': !isPinned}")
     .logger-view(v-if="showLogs")
       .pane-toolbar
         .b-btn.is-small(@click="$log.clearLogs()")

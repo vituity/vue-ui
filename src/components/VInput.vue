@@ -1,5 +1,5 @@
 <template lang="pug">
-  .v-input
+.v-input
     .input-wrapper
       slot
       .border

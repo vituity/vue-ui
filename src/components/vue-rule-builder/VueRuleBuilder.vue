@@ -1,5 +1,5 @@
 <template lang="pug">
-  .vue-rule-builder(:class="[isBasic ? 'vrb-basic' : 'vrb-advanced']")
+.vue-rule-builder(:class="[isBasic ? 'vrb-basic' : 'vrb-advanced']")
     slot(name="top" v-bind="vrbProps")
     slot(v-bind="vrbProps")
       rule-builder-group(v-bind="vrbProps" :rule.sync="rule")
