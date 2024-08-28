@@ -14,7 +14,7 @@
       <span class="caret" v-else></span>
     </div>
     <ul class="sub-nav">
-      <template v-for="submenu in menu.children" :key="submenu.path">
+      <template v-for="submenu in menu.children">
         <SidebarNavList
           ref="sidebarNavList"
           :menu="submenu"
