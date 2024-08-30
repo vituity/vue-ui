@@ -1,8 +1,9 @@
-<template lang="pug">
-.dashboard
-  | {{data}}
-
+<template>
+  <div class="dashboard">
+    {{ data }}
+  </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -13,6 +14,5 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-
+<style scoped>
 </style>

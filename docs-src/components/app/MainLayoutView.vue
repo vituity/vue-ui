@@ -1,56 +1,77 @@
-<template lang="pug">
-//- Place fixed items outside .app-scroll
+<template>
+  <!-- Place fixed items outside .app-scroll -->
 
-//- sticky sidebar and statusbar (Header not fixed)
-#app(:class="{'has-scrolled':scrollPosition > 0}")
-  .app-scroll(v-on:scroll="onScroll" ref="appScroll")
-    Header
-    .app-body
-      Sidebar.sticky-sidebar(:style="{height:sidebarHeight}")
-      router-view
-  Statusbar
+  <!-- Sticky sidebar and statusbar (Header not fixed) -->
+  <div id="app" :class="{'has-scrolled': scrollPosition > 0}">
+    <div class="app-scroll" @scroll="onScroll" ref="appScroll">
+      <Header />
+      <div class="app-body">
+        <Sidebar class="sticky-sidebar" :style="{ height: sidebarHeight }" />
+        <router-view />
+      </div>
+    </div>
+    <Statusbar />
+  </div>
 
-//-Fixed header, sidebar, statusbar
-//#app
-  Header
-  .app-body.no-scroll
-    Sidebar
-    .app-scroll
-      router-view
-  Statusbar
+  <!-- Fixed header, sidebar, statusbar -->
+  <!--
+  <div id="app">
+    <Header />
+    <div class="app-body no-scroll">
+      <Sidebar />
+      <div class="app-scroll">
+        <router-view />
+      </div>
+    </div>
+    <Statusbar />
+  </div>
+  -->
 
-//-Fixed statusbar
-//#app.no-scroll
-  .app-scroll
-    Header
-    .app-body
-      Sidebar
-      router-view
-  Statusbar
+  <!-- Fixed statusbar -->
+  <!--
+  <div id="app" class="no-scroll">
+    <div class="app-scroll">
+      <Header />
+      <div class="app-body">
+        <Sidebar />
+        <router-view />
+      </div>
+    </div>
+    <Statusbar />
+  </div>
+  -->
 
-//- Fixed header and statusbar
-//#app.no-scroll
-  Header
-  .app-scroll
-    .app-body
-      Sidebar
-      router-view
-  Statusbar
+  <!-- Fixed header and statusbar -->
+  <!--
+  <div id="app" class="no-scroll">
+    <Header />
+    <div class="app-scroll">
+      <div class="app-body">
+        <Sidebar />
+        <router-view />
+      </div>
+    </div>
+    <Statusbar />
+  </div>
+  -->
 
-//- No Fixed elements
-//#app
-  Header
-  .app-body
-    Sidebar
-    router-view
-  Statusbar
+  <!-- No Fixed elements -->
+  <!--
+  <div id="app">
+    <Header />
+    <div class="app-body">
+      <Sidebar />
+      <router-view />
+    </div>
+    <Statusbar />
+  </div>
+  -->
 </template>
 
 <script>
 export default {
   data() {
     return {
-      // showNavbar: true,
       scrollPosition: 0,
       win: {
         height: 0,
@@ -93,59 +114,67 @@ export default {
     }
   }
 }
-
 </script>
 
-<style lang="sass" scoped>
-#app
-  display: flex
-  flex-direction: column
-  min-height: 100vh
+<style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  .app-body
-    display: flex
-    flex: 1
-    position: relative
+.app-body {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
 
-.sticky-sidebar
-  position: sticky
-  top: 0
+.sticky-sidebar {
+  position: sticky;
+  top: 0;
+}
 
-.has-scrolled
-  .hide-on-scroll
-    display: none
+.has-scrolled .hide-on-scroll {
+  display: none;
+}
 
-.no-scroll
-  overflow: hidden
+.no-scroll {
+  overflow: hidden;
+}
 
-.app-scroll
-  overflow: auto
-  display: flex
-  flex-direction: column
-  flex: 1
+.app-scroll {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
-.flex-row
-  display: flex
+.flex-row {
+  display: flex;
+}
 
-.flex-column
-  display: flex
-  flex-direction: column
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
 
-// .content
-//   flex: auto 1 1
-//   overflow: hidden
-//   position: relative
+/* .content {
+  flex: auto 1 1;
+  overflow: hidden;
+  position: relative;
+}
 
-// .main-layout
-//   display: flex
-//   flex: auto 1 1
-//   overflow: hidden
+.main-layout {
+  display: flex;
+  flex: auto 1 1;
+  overflow: hidden;
+}
 
-// .content-view
-//   background-color: $background
-//   flex: auto 1 1
-//   display: flex
-//   flex-direction: column
-//   overflow: hidden
-
+.content-view {
+  background-color: $background;
+  flex: auto 1 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+} */
 </style>

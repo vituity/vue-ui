@@ -1,235 +1,259 @@
-<template lang="pug">
-page(title='Tables')
-    .page--body
-      .b-box
-        | Default Style
-        table.b-table
-          thead
-            tr
-              th
-                abbr(title='Position') Pos
-              th Team
-              th
-                abbr(title='Played') Pld
-              th
-                abbr(title='Won') W
-              th
-                abbr(title='Drawn') D
-              th
-                abbr(title='Lost') L
-              th
-                abbr(title='Goals for') GF
-              th
-                abbr(title='Goals against') GA
-              th
-                abbr(title='Goal difference') GD
-              th
-                abbr(title='Points') Pts
-              th Qualification or relegation
-          tfoot
-            tr
-              th
-                abbr(title='Position') Pos
-              th Team
-              th
-                abbr(title='Played') Pld
-              th
-                abbr(title='Won') W
-              th
-                abbr(title='Drawn') D
-              th
-                abbr(title='Lost') L
-              th
-                abbr(title='Goals for') GF
-              th
-                abbr(title='Goals against') GA
-              th
-                abbr(title='Goal difference') GD
-              th
-                abbr(title='Points') Pts
-              th Qualification or relegation
-          tbody
-          <template v-for="row in footballTable">
-            tr
-              th {{ row.position }}
-              td
-                a(:href='row.team.href') {{ row.team.title }} 
-                strong (C)
-              td {{ row.played }}
-              td {{ row.won }}
-              td {{ row.drawn }}
-              td {{ row.lost }}
-              td {{ row.goalsFor }}
-              td {{ row.goalsAgainst }}
-              td {{ row.goalDifference }}
-              td {{ row.points }}
-              td
-                | {{ row.qualification.type }} {{row.qualification.type === 'Qualification' ? 'for the' : row.qualification.type === '' ? '' : 'to the'}} 
-                a(:href='row.qualification.href' :title='row.qualification.title') {{ row.qualification.text }}
+<template>
+  <div class="page">
+    <div class="page--body">
+      <div class="b-box">
+        Default Style
+        <table class="b-table">
+          <thead>
+            <tr>
+              <th v-for="column in footballColumnTitles" :key="column.title">
+                <abbr v-if="column.abbreviated" :title="column.ariaLabel">
+                  {{ column.title }}
+                </abbr>
+                <span v-else>
+                  {{ column.title }}
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th v-for="column in footballColumnTitles" :key="column.title">
+                <abbr v-if="column.abbreviated" :title="column.ariaLabel">
+                  {{ column.title }}
+                </abbr>
+                <span v-else>
+                  {{ column.title }}
+                </span>
+              </th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr v-for="row in footballTableData" :key="row.position">
+              <th>{{ row.position }}</th>
+              <td>
+                <a :href="row.team.href">{{ row.team.title }}</a>
+                <strong>(C)</strong>
+              </td>
+              <td>{{ row.played }}</td>
+              <td>{{ row.won }}</td>
+              <td>{{ row.drawn }}</td>
+              <td>{{ row.lost }}</td>
+              <td>{{ row.goalsFor }}</td>
+              <td>{{ row.goalsAgainst }}</td>
+              <td>{{ row.goalDifference }}</td>
+              <td>{{ row.points }}</td>
+              <td>
+                {{ row.qualification.type }}
+                <span v-if="row.qualification.type === 'Qualification'">for the</span>
+                <span v-else-if="row.qualification.type === ''"></span>
+                <span v-else>to the</span>
+                <a :href="row.qualification.href" :title="row.qualification.title">
+                  {{ row.qualification.text }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-          </template>
-      .is-flex-row-wrap.justify-content-space-between
-        .b-box
-          h3 .is-bordered
-          table.b-table.is-bordered
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td Six
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
-        .b-box
-          h3 .is-striped
-          table.b-table.is-striped
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td Six
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
-        .b-box
-          h3 .is-narrow
-          table.b-table.is-narrow.is-bordered
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td
-                  .b-btn.is-tiny.is-danger
-                    .b-icon
-                      i.fas.fa-times
-                    span Delete
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
-        .b-box
-          h3 .is-compact
-          table.b-table.is-compact.is-bordered
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td
-                  .b-btn.is-tiny.is-danger
-                    .b-icon
-                      i.fas.fa-times
-                    span Delete
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
-        .b-box
-          h3 .is-hoverable
-          table.b-table.is-hoverable.is-bordered
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td Six
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
-        .b-box(style="width:100%")
-          h3 .is-fullwidth
-          table.b-table.is-hoverable.is-bordered.is-fullwidth
-            thead
-              tr
-                th One
-                th Two
-            tbody
-              tr
-                td Three
-                td Four
-              tr
-                td Five
-                td Six
-              tr
-                td Seven
-                td Eight
-              tr
-                td Nine
-                td Ten
-              tr
-                td Eleven
-                td Twelve
+      <div class="is-flex-row-wrap justify-content-space-between">
+        <div class="b-box">
+          <h3 class="is-bordered">.is-bordered</h3>
+          <table class="b-table is-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+              <tr>
+                <td>Seven</td>
+                <td>Eight</td>
+              </tr>
+              <tr>
+                <td>Nine</td>
+                <td>Ten</td>
+              </tr>
+              <tr>
+                <td>Eleven</td>
+                <td>Twelve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-box">
+          <h3 class="is-striped">.is-striped</h3>
+          <table class="b-table is-striped">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+              <tr>
+                <td>Seven</td>
+                <td>Eight</td>
+              </tr>
+              <tr>
+                <td>Nine</td>
+                <td>Ten</td>
+              </tr>
+              <tr>
+                <td>Eleven</td>
+                <td>Twelve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-box">
+          <h3 class="is-narrow">.is-compact</h3>
+          <table class="b-table is-narrow is-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>
+                  <button class="b-btn is-tiny is-danger">
+                    <span class="b-icon">
+                      <i class="fas fa-times"></i>
+                    </span>
+                    <span>Delete</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Seven</td>
+                <td>Eight</td>
+              </tr>
+              <tr>
+                <td>Nine</td>
+                <td>Ten</td>
+              </tr>
+              <tr>
+                <td>Eleven</td>
+                <td>Twelve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-box">
+          <h3 class="is-hoverable">.is-hoverable</h3>
+          <table class="b-table is-hoverable is-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+              <tr>
+                <td>Seven</td>
+                <td>Eight</td>
+              </tr>
+              <tr>
+                <td>Nine</td>
+                <td>Ten</td>
+              </tr>
+              <tr>
+                <td>Eleven</td>
+                <td>Twelve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-box" style="width:100%">
+          <h3 class="is-fullwidth">.is-fullwidth</h3>
+          <table class="b-table is-hoverable is-bordered is-fullwidth">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+              <tr>
+                <td>Seven</td>
+                <td>Eight</td>
+              </tr>
+              <tr>
+                <td>Nine</td>
+                <td>Ten</td>
+              </tr>
+              <tr>
+                <td>Eleven</td>
+                <td>Twelve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-  
-  <script>
-  import { footballTable } from './data/tablesData';
-  export default {
+
+<script>
+import { footballColumnTitles, footballTableData } from './data/tablesData'
+
+export default {
   data() {
     return {
-      footballTable,
+      footballTableData,
+      footballColumnTitles
     }
   }
-  }
-  </script>
-  
-  <style lang="sass" scoped>
-  .page--body
-    font-size: .8rem
-  </style>
-  
+}
+</script>
+
+<style scoped>
+.page--body {
+  font-size: 0.8rem;
+}
+</style>

@@ -7,27 +7,34 @@
     </div>
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="#">
-          Home
+        <!-- Simple Items -->
+        <a
+          v-for="item in simpleItems"
+          :key="item.name"
+          class="navbar-item"
+          :href="item.link"
+        >
+          {{ item.name }}
         </a>
-        <a class="navbar-item" href="#">
-          Documentation
-        </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">
-            More
+        <!-- Dropdown Items -->
+        <div
+          v-for="item in dropdownItems"
+          :key="item.name"
+          class="navbar-item has-dropdown is-hoverable"
+        >
+          <a class="navbar-link" :href="item.link">
+            {{ item.name }}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">
-              About
+            <a
+              v-for="subItem in item.subItems"
+              :key="subItem.name"
+              class="navbar-item"
+              :href="subItem.link"
+            >
+              {{ subItem.name }}
             </a>
-            <a class="navbar-item" href="#">
-              Jobs
-            </a>
-            <a class="navbar-item" href="#">
-              Contact
-            </a>
-            <hr class="navbar-divider"/>
+            <hr class="navbar-divider" />
             <a class="navbar-item" href="#">
               Report an issue
             </a>
@@ -54,7 +61,27 @@
 export default {
   data() {
     return {
-    };
+      navbarItems: [
+        { name: 'Home', link: '/' },
+        { name: 'Documentation', link: '/documentation' },
+        {
+          name: 'More',
+          subItems: [
+            { name: 'About', link: '/about' },
+            { name: 'Jobs', link: '/jobs' },
+            { name: 'Contact', link: '/contact' }
+          ]
+        }
+      ]
+    }
+  },
+  computed: {
+    simpleItems() {
+      return this.navbarItems.filter(item => !item.subItems)
+    },
+    dropdownItems() {
+      return this.navbarItems.filter(item => item.subItems)
+    }
   }
 }
 </script>
