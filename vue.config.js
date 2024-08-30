@@ -5,9 +5,13 @@ module.exports = {
 
   // outputDir: './docs',
   // publicPath: './',
+  transpileDependencies: [
+    'cli-plugin-babel',
+    'cli-service',
+  ],
   devServer: {
     host: 'localhost',
-    disableHostCheck: true
+    allowedHosts: 'all',
   },
   configureWebpack: {
     entry: {
@@ -38,7 +42,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: "@import '~@style'"
+        additionalData: "@import '~@style';"
       }
     }
   }

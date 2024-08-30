@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.tag-select
+div.tag-select
     multiselect(
       v-model="values"
       :placeholder="placeholder"

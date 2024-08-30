@@ -1,41 +1,43 @@
-<template lang="pug">
-page(title='Rule Builder')
-  .page--body
-    h4 Floating
-    vituity-rule-builder(
-      v-model="rule"
-      :isFloating="true"
-      :filters="filters"
-      :maxDepth="1"
-      :isBasic="true"
-      floatingButtonClass="is-rounded is-info is-outlined"
-      namespace="example.basic",
-      @save="onRuleSaved"
-      @load="onRuleLoaded"
-      @delete="onRuleDeleted"
-    )
-    h4.m-t-20 Custom
-    //- vue-rule-builder(
-    //-     :filters="filters"
-    //-     :maxDepth="3"
-    //-     v-model="rule"
-    //-   )
-    //- BulmaRuleSaveManager(
-    //-     :savedRules.sync="savedRules"
-    //-     :rule="rule"
-    //-     namespace="example.basic"
-    //-     @save="onRuleSaved"
-    //-     @load="onRuleLoaded"
-    //-     @delete="onRuleDeleted"
-    //-   )
-    //- br
-    p
-    pre {{ outputFormatted }}
-
+<template>
+  <Page title="Rule Builder">
+    <div class="page--body">
+      <h4>Floating</h4>
+      <vituity-rule-builder
+        v-model="rule"
+        :is-floating="true"
+        :filters="filters"
+        :max-depth="1"
+        :is-basic="true"
+        floating-button-class="is-rounded is-info is-outlined"
+        namespace="example.basic"
+        @save="onRuleSaved"
+        @load="onRuleLoaded"
+        @delete="onRuleDeleted"
+      />
+      <h4 class="m-t-20">Custom</h4>
+      <!-- 
+      <vue-rule-builder
+        :filters="filters"
+        :max-depth="3"
+        v-model="rule"
+      />
+      <BulmaRuleSaveManager
+        :saved-rules.sync="savedRules"
+        :rule="rule"
+        namespace="example.basic"
+        @save="onRuleSaved"
+        @load="onRuleLoaded"
+        @delete="onRuleDeleted"
+      />
+      <br /> 
+      -->
+      <p></p>
+      <pre>{{ outputFormatted }}</pre>
+    </div>
+  </Page>
 </template>
 
 <script>
-
 const filters = [
   {
     field: 'field_1',
@@ -56,11 +58,7 @@ const filters = [
     control: 'tag-select',
     operators: ['in', 'not_in'],
     props: {
-      options: [
-        'hello',
-        'darkness',
-        'my old friend'
-      ]
+      options: ['hello', 'darkness', 'my old friend']
     }
   },
   {
@@ -103,7 +101,7 @@ const filters = [
       numeralThousandsGroupStyle: 'none'
     }
   }
-]
+];
 
 const defaultRule = {
   logicalOperator: 'all',
@@ -111,50 +109,45 @@ const defaultRule = {
     {
       field: 'name',
       operator: 'in',
-      value: [
-        '123456',
-        '7891'
-      ]
-
+      value: ['123456', '7891']
     },
     {
       field: 'price',
       operator: 'in',
-      value: [25.30]
+      value: [25.3]
     }
   ]
-}
+};
+
 export default {
-  components: {
-    // RuleBuilderSaveManager
-  },
   data() {
     return {
       rule: {},
       filters: filters,
       savedRules: []
-    }
+    };
   },
   computed: {
     outputFormatted() {
-      return JSON.stringify(this.rule, null, 2)
+      return JSON.stringify(this.rule, null, 2);
     }
   },
   methods: {
     onRuleSaved(rule) {
-      console.log('save 2', rule)
+      console.log('save 2', rule);
     },
     onRuleDeleted(rule) {
-      console.log('delete 2', rule)
+      console.log('delete 2', rule);
     },
     onRuleLoaded(rule) {
-      console.log('load 2', rule)
+      console.log('load 2', rule);
     }
   }
-}
+};
 </script>
 
-<style lang="sass" scoped>
-.page--body
-  font-size: 1rem
+<style  scoped>
+.page--body {
+  font-size: 1rem;
+}
 </style>
